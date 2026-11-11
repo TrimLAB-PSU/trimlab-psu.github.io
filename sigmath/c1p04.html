@@ -280,6 +280,14 @@ ol.refs a{color:var(--accent)}
 .prob{border-left:4px solid var(--accent);background:var(--box);border-radius:0 6px 6px 0;padding:12px 16px 12px;margin:22px 0 14px}
 .prob .tag{font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.03em;color:var(--accent);margin-bottom:2px}
 .prob p{margin:0;font-weight:600}
+.prob.ess p{font-weight:400;margin:0 0 .45em}.prob.ess>p:first-of-type{font-weight:600}
+ul.essl{list-style:none;padding:0;margin:.35em 0 .6em}ul.essl li{margin:.3em 0}
+.el{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.03em;color:var(--muted);margin-right:3px}
+.essd{color:var(--muted)}.essa{margin:.4em 0 0}.essa b{color:var(--accent);font-family:var(--sans);font-size:.92em;margin-right:4px}
+.essq{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:10px 0 8px;margin:14px 0 18px}.essq p{margin:.2em 0}
+h3.essh{font-family:var(--sans);font-size:14px;letter-spacing:.04em;color:var(--accent-2);margin:26px 0 4px}
+.box.ess{margin:12px 0}.essmore{font-size:.92em;color:var(--muted)}
+
 .md.eqn{scroll-margin-top:30vh}
 :target{scroll-margin-top:30vh}
 .peek{position:fixed;z-index:45;display:none;font-family:var(--sans);font-size:13.5px;line-height:1.6;color:var(--ink);background:var(--paper);
@@ -429,8 +437,9 @@ var on=t?t==="1":(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").
     </ul>
   </div>
   <div class="howto">
-    <h4>วิธีอ่าน</h4>
-    <p>ขั้น 0 ตั้งคำถาม 3 ข้อ<span class="se"> </span>แต่ละข้อตอบด้วยขั้น 1 ถึง 5 หนึ่งชุด<span class="se"> </span>เมื่อเริ่มคำถามข้อใหม่ แถบขั้นเหนือหัวข้อจะกลับไปที่ขั้น 1 อีกครั้ง<span class="se"> </span>บางชุดข้ามขั้นที่ไม่จำเป็น<span class="se"> </span>ค่าของโคไซน์ที่ต้องใช้ให้ไว้ในหน้าทุกครั้ง</p>
+    <h4>บทคัดย่อ</h4>
+    <p>ตอนนี้มุ่งให้ผู้ศึกษาเข้าใจว่าการเก็บสัญญาณเป็นตัวเลขทุกช่วงเวลาอาจสูญเสียอะไรไป และเลือกอัตราชักตัวอย่างได้อย่างมีเหตุผล</p>
+    <p>ตอนนี้พาไปดู ECG ที่บันทึกด้วยอัตรา 80 ค่าต่อวินาทีแล้วพบคลื่น 30 Hz ที่ไม่ควรมี<span class="se"> </span>ผู้ศึกษาจะได้พิสูจน์ว่าสองความถี่ให้ค่าตัวอย่างชุดเดียวกันได้อย่างไร จะได้หาความถี่ที่ไซน์ปรากฏหลังชักตัวอย่าง จะได้เห็นที่มาของเงื่อนไขว่าอัตราชักตัวอย่างต้องมากกว่าสองเท่าของความถี่สูงสุด และจะได้เห็นว่าทำไมเอเลียสซิงต้องกันไว้ก่อนชักตัวอย่าง</p>
   </div>
 </aside>
 
