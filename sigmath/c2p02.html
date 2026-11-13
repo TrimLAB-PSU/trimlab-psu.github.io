@@ -136,6 +136,7 @@ table.grid.slim td:last-child{background:transparent}
 /* figures */
 figure{margin:26px 0}
 .fig2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.fig3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}@media (max-width:560px){.fig3{grid-template-columns:minmax(0,1fr);gap:14px}}
 @media (max-width:560px){.fig2{grid-template-columns:minmax(0,1fr);gap:18px}}
 svg.fig{width:100%;height:auto;display:block;font-family:var(--sans);fill:var(--ink)}
 svg.fig .pt{font-size:13px;font-weight:600;fill:var(--accent)}
