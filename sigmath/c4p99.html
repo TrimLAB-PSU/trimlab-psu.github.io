@@ -120,7 +120,7 @@ ol.steps li{margin-bottom:.6em}
 .vd.ok{color:var(--paper);background:var(--accent)}
 details.redo{margin:4px 0 12px;font-family:var(--sans);font-size:14px}
 details.redo summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13px;letter-spacing:.03em}
-details.redo pre{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;
+details.redo pre,div.example pre{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;
   font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
 details.redo .rnote{color:var(--muted);font-size:13px;margin:6px 0 0}
 
@@ -382,7 +382,7 @@ ul.essb{margin:.25em 0 .2em;padding-left:1.25em}ul.essb li{margin:.55em 0;line-h
   }
   html.night{--muted:#9faea3}
   html.night .page{box-shadow:0 0 0 1px #26302a, 0 18px 50px -30px rgba(0,0,0,.7)}
-  html.night details.redo pre{background:var(--box)}
+  html.night details.redo pre,html.night div.example pre{background:var(--box)}
   html.night body.hide .rd:not(.shown){background:repeating-linear-gradient(90deg,var(--rule) 0 6px,transparent 6px 10px) bottom/100% 1.5px no-repeat, rgba(143,208,169,.09)}
   html.night body.hide rect.slot{fill:rgba(143,208,169,.10)}
   html.night .figtap{background:rgba(143,208,169,.12)}
@@ -502,6 +502,15 @@ code.ic .ns{color:#267f99} code.ic .fn{color:#795e26}
 html.night code.ic{background:#1e1e1e;border-color:#3c3c3c;color:#d4d4d4}
 html.night code.ic .ns{color:#4ec9b0} html.night code.ic .fn{color:#dcdcaa}
 @media print{code.ic{background:none;border-color:#ccc}}
+/* Python tokens in code blocks and inline code (VS Code Light Modern / Dark Modern) */
+pre.py{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;color:#1f1f1f}
+pre.py .py-c,code.ic .py-c{color:#008000} pre.py .py-s,code.ic .py-s{color:#a31515} pre.py .py-n,code.ic .py-n{color:#098658}
+pre.py .py-k,code.ic .py-k{color:#af00db} pre.py .py-b,code.ic .py-b{color:#0000ff} pre.py .py-f,code.ic .py-f{color:#795e26}
+pre.py .py-v,code.ic .py-v,pre.py .py-p,code.ic .py-p{color:#001080} pre.py .py-m,code.ic .py-m{color:#267f99}
+html.night pre.py{background:#1e1e1e;border-color:#3c3c3c;color:#d4d4d4}
+html.night pre.py .py-c,html.night code.ic .py-c{color:#6a9955} html.night pre.py .py-s,html.night code.ic .py-s{color:#ce9178} html.night pre.py .py-n,html.night code.ic .py-n{color:#b5cea8}
+html.night pre.py .py-k,html.night code.ic .py-k{color:#c586c0} html.night pre.py .py-b,html.night code.ic .py-b{color:#569cd6} html.night pre.py .py-f,html.night code.ic .py-f{color:#dcdcaa}
+html.night pre.py .py-v,html.night code.ic .py-v,html.night pre.py .py-p,html.night code.ic .py-p{color:#9cdcfe} html.night pre.py .py-m,html.night code.ic .py-m{color:#4ec9b0}
 </style>
 <script>(function(){var r=document.documentElement,t=null,n=null;try{t=localStorage.getItem("theme");n=localStorage.getItem("night")}catch(e){}
 r.setAttribute("data-theme",t||"green");var on=n?n==="1":(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);if(on)r.classList.add("night");})();</script>
@@ -645,18 +654,18 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v0 v585 h43z"/></svg></span></span></
 <p><a class="lref" href="#pr-1D">ข้อเสนอ 1D</a> คลาดไม่เกิน 0.9% ซึ่งอยู่ใต้ขอบเขต 1.0% ที่พิสูจน์ไว้ จึงผ่าน 1ก* และ 1ข* <span class="vd ok">ใช้ได้ดี</span><span class="se"> </span>งานราว 500 การคูณจริงต่อปุ่มเป็นราวครึ่งหนึ่งของผลบวกตามนิยาม ซึ่งคูณจำนวนเชิงซ้อนกับจำนวนจริง 500 ครั้ง ข้อเสนอนี้จึงตอบ 1ค ได้ดีเมื่อต้องการเพียงไม่กี่สิบปุ่ม</p>
 <p class="cnext"><b>กรณีถัดไป</b> ถ้าการมองแต่ละครั้งยาว 2.5 วินาที เดาก่อนว่าความถี่ของปุ่มกี่ความถี่จาก 40 ความถี่ตกช่องพอดี แล้วตรวจคำตอบในแบบฝึกหัดข้อ 4</p>
 <details class="redo"><summary>คำนวณซ้ำเอง (Python)</summary>
-<pre><code>import numpy as np
-fs, tg, ph = 250.0, 8.0 + 0.2 * np.arange(40), np.linspace(0, 2 * np.pi, 16, endpoint=False)
-def read(x, f, how):
-    N = len(x)
-    if how in 'AC': return 2 * abs(np.fft.fft(x)[round(f * N / fs)]) / N
-    if how == 'B': return 2 * abs(np.fft.fft(x, 2 * N)[round(f * 2 * N / fs)]) / N
-    return 2 * abs(np.sum(x * np.exp(-2j * np.pi * f * np.arange(N) / fs))) / N
-for how in 'ABCD':
-    n = np.arange(1250 if how == 'C' else 500)
-    e = [abs(read(np.cos(2 * np.pi * f * n / fs + p), f, how) - 1) for f in tg for p in ph]
-    print(how, round(100 * max(e), 1))</code></pre>
-<p class="rnote">โค้ดนี้คำนวณคอลัมน์สุดท้ายของตาราง<span class="se"> </span>สองคอลัมน์แรกได้จาก <code>read</code> ที่ <code>f</code> เท่ากับ 8.2 และ 8.4<span class="se"> </span>ลองเปลี่ยน 500 เป็น 625 ใน<a class="lref" href="#pr-1A">ข้อเสนอ 1A</a> แล้วนับความถี่ที่คลาดเป็นศูนย์ เพื่อตอบกรณีถัดไป</p>
+<pre class="py"><code><span class="py-k">import</span> <span class="py-m">numpy</span> <span class="py-k">as</span> <span class="py-m">np</span>
+<span class="py-v">fs</span>, <span class="py-v">tg</span>, <span class="py-p">ph</span> = <span class="py-n">250.0</span>, <span class="py-n">8.0</span> + <span class="py-n">0.2</span> * <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-n">40</span>), <span class="py-m">np</span>.<span class="py-f">linspace</span>(<span class="py-n">0</span>, <span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-v">pi</span>, <span class="py-n">16</span>, <span class="py-p">endpoint</span>=<span class="py-b">False</span>)
+<span class="py-b">def</span> <span class="py-f">read</span>(<span class="py-v">x</span>, <span class="py-v">f</span>, <span class="py-v">how</span>):
+    <span class="py-v">N</span> = <span class="py-f">len</span>(<span class="py-v">x</span>)
+    <span class="py-k">if</span> <span class="py-v">how</span> <span class="py-k">in</span> <span class="py-s">'AC'</span>: <span class="py-k">return</span> <span class="py-n">2</span> * <span class="py-f">abs</span>(<span class="py-m">np</span>.<span class="py-m">fft</span>.<span class="py-f">fft</span>(<span class="py-v">x</span>)[<span class="py-f">round</span>(<span class="py-v">f</span> * <span class="py-v">N</span> / <span class="py-v">fs</span>)]) / <span class="py-v">N</span>
+    <span class="py-k">if</span> <span class="py-v">how</span> == <span class="py-s">'B'</span>: <span class="py-k">return</span> <span class="py-n">2</span> * <span class="py-f">abs</span>(<span class="py-m">np</span>.<span class="py-m">fft</span>.<span class="py-f">fft</span>(<span class="py-v">x</span>, <span class="py-n">2</span> * <span class="py-v">N</span>)[<span class="py-f">round</span>(<span class="py-v">f</span> * <span class="py-n">2</span> * <span class="py-v">N</span> / <span class="py-v">fs</span>)]) / <span class="py-v">N</span>
+    <span class="py-k">return</span> <span class="py-n">2</span> * <span class="py-f">abs</span>(<span class="py-m">np</span>.<span class="py-f">sum</span>(<span class="py-v">x</span> * <span class="py-m">np</span>.<span class="py-f">exp</span>(-<span class="py-n">2j</span> * <span class="py-m">np</span>.<span class="py-v">pi</span> * <span class="py-v">f</span> * <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-v">N</span>) / <span class="py-v">fs</span>))) / <span class="py-v">N</span>
+<span class="py-k">for</span> <span class="py-v">how</span> <span class="py-k">in</span> <span class="py-s">'ABCD'</span>:
+    <span class="py-v">n</span> = <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-n">1250</span> <span class="py-k">if</span> <span class="py-v">how</span> == <span class="py-s">'C'</span> <span class="py-k">else</span> <span class="py-n">500</span>)
+    <span class="py-v">e</span> = [<span class="py-f">abs</span>(<span class="py-f">read</span>(<span class="py-m">np</span>.<span class="py-f">cos</span>(<span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-v">pi</span> * <span class="py-v">f</span> * <span class="py-v">n</span> / <span class="py-v">fs</span> + <span class="py-v">p</span>), <span class="py-v">f</span>, <span class="py-v">how</span>) - <span class="py-n">1</span>) <span class="py-k">for</span> <span class="py-v">f</span> <span class="py-k">in</span> <span class="py-v">tg</span> <span class="py-k">for</span> <span class="py-v">p</span> <span class="py-k">in</span> <span class="py-v">ph</span>]
+    <span class="py-f">print</span>(<span class="py-v">how</span>, <span class="py-f">round</span>(<span class="py-n">100</span> * <span class="py-f">max</span>(<span class="py-v">e</span>), <span class="py-n">1</span>))</code></pre>
+<p class="rnote">โค้ดนี้คำนวณคอลัมน์สุดท้ายของตาราง<span class="se"> </span>สองคอลัมน์แรกได้จาก <code class="ic"><span class="py-v">read</span></code> ที่ <code class="ic"><span class="py-v">f</span></code> เท่ากับ 8.2 และ 8.4<span class="se"> </span>ถ้าเปลี่ยน 500 เป็น 625 ใน<a class="lref" href="#pr-1A">ข้อเสนอ 1A</a> แล้วนับความถี่ที่คลาดเป็นศูนย์ โค้ดจะให้ผลของกรณีถัดไป ซึ่งใช้ตรวจคำตอบที่หาด้วยมือได้</p>
 </details>
 </div>
 
@@ -753,21 +762,21 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v0 v585 h43z"/></svg></span></span></
 <p><a class="lref" href="#pr-2D">ข้อเสนอ 2D</a> ให้ LF/HF 1.000 และกำลัง 112.5 ms² ทั้งสองแถบทุกบันทึก จึงผ่าน 2ก*, 2ข* และมี 2ค ดีมาก <span class="vd ok">ใช้ได้ดี</span></p>
 <p class="cnext"><b>กรณีถัดไป</b> ถ้าต้องการรายงานเพียงกำลังในแถบ HF จากบันทึกที่สั้นลง เดาก่อนว่าบันทึกสั้นได้ถึงราวเท่าใด เมื่อใช้เกณฑ์ว่าบันทึกต้องยาวอย่างน้อยสิบเท่าของคาบของความถี่ต่ำสุดของแถบ แล้วตรวจคำตอบในแบบฝึกหัดข้อ 5</p>
 <details class="redo"><summary>คำนวณซ้ำเอง (Python)</summary>
-<pre><code>import numpy as np
-N = 1200; t = np.arange(N) / 4; k = np.arange(N) / 300; w = 0.5 - 0.5 * np.cos(2 * np.pi * np.arange(N) / N)
-lf, hf = (k &gt;= 0.04) &amp; (k &lt; 0.15), (k &gt;= 0.15) &amp; (k &lt;= 0.4)
-def bands(x, how):
-    g = 1.0
-    if how == 'B': x = x - x.mean()
-    if how == 'C': x = x - np.polyval(np.polyfit(t, x, 1), t)
-    if how == 'D': x, g = x * w, 3 / 8
-    P = 2 * np.abs(np.fft.fft(x)) ** 2 / N ** 2 / g; return P[lf].sum() / P[hf].sum()
-ph = np.linspace(0, 2 * np.pi, 8, endpoint=False)
-for how in 'ABCD':
-    r = [bands(900 - D * np.exp(-t / tau) + 15 * np.cos(2 * np.pi * 0.095 * t + a) + 15 * np.cos(2 * np.pi * 0.27 * t + b), how)
-         for D in (0, 100, 200) for tau in (30, 45, 60, 90, 150, 300) for a in ph for b in ph]
-    print(how, round(min(r), 3), round(max(r), 3))</code></pre>
-<p class="rnote">โค้ดนี้คำนวณสองคอลัมน์แรกของตาราง<span class="se"> </span><code>np.polyfit</code> ให้เส้นตรงที่ใกล้ที่สุด ซึ่งเท่ากับผลรวมของสองภาพฉายใน<a class="lref" href="#pr-2C">ข้อเสนอ 2C</a><span class="se"> </span>เปลี่ยน <code>/ P[hf].sum()</code> เป็นการคืน <code>P[lf].sum()</code> เพื่อหาคอลัมน์ LF</p>
+<pre class="py"><code><span class="py-k">import</span> <span class="py-m">numpy</span> <span class="py-k">as</span> <span class="py-m">np</span>
+<span class="py-v">N</span> = <span class="py-n">1200</span>; <span class="py-v">t</span> = <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-v">N</span>) / <span class="py-n">4</span>; <span class="py-v">k</span> = <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-v">N</span>) / <span class="py-n">300</span>; <span class="py-v">w</span> = <span class="py-n">0.5</span> - <span class="py-n">0.5</span> * <span class="py-m">np</span>.<span class="py-f">cos</span>(<span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-v">pi</span> * <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-v">N</span>) / <span class="py-v">N</span>)
+<span class="py-v">lf</span>, <span class="py-p">hf</span> = (<span class="py-v">k</span> &gt;= <span class="py-n">0.04</span>) &amp; (<span class="py-v">k</span> &lt; <span class="py-n">0.15</span>), (<span class="py-v">k</span> &gt;= <span class="py-n">0.15</span>) &amp; (<span class="py-v">k</span> &lt;= <span class="py-n">0.4</span>)
+<span class="py-b">def</span> <span class="py-f">bands</span>(<span class="py-v">x</span>, <span class="py-v">how</span>):
+    <span class="py-v">g</span> = <span class="py-n">1.0</span>
+    <span class="py-k">if</span> <span class="py-v">how</span> == <span class="py-s">'B'</span>: <span class="py-v">x</span> = <span class="py-v">x</span> - <span class="py-v">x</span>.<span class="py-f">mean</span>()
+    <span class="py-k">if</span> <span class="py-v">how</span> == <span class="py-s">'C'</span>: <span class="py-v">x</span> = <span class="py-v">x</span> - <span class="py-m">np</span>.<span class="py-f">polyval</span>(<span class="py-m">np</span>.<span class="py-f">polyfit</span>(<span class="py-v">t</span>, <span class="py-v">x</span>, <span class="py-n">1</span>), <span class="py-v">t</span>)
+    <span class="py-k">if</span> <span class="py-v">how</span> == <span class="py-s">'D'</span>: <span class="py-v">x</span>, <span class="py-p">g</span> = <span class="py-v">x</span> * <span class="py-v">w</span>, <span class="py-n">3</span> / <span class="py-n">8</span>
+    <span class="py-v">P</span> = <span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-f">abs</span>(<span class="py-m">np</span>.<span class="py-m">fft</span>.<span class="py-f">fft</span>(<span class="py-v">x</span>)) ** <span class="py-n">2</span> / <span class="py-v">N</span> ** <span class="py-n">2</span> / <span class="py-v">g</span>; <span class="py-k">return</span> <span class="py-v">P</span>[<span class="py-v">lf</span>].<span class="py-f">sum</span>() / <span class="py-v">P</span>[<span class="py-v">hf</span>].<span class="py-f">sum</span>()
+<span class="py-v">ph</span> = <span class="py-m">np</span>.<span class="py-f">linspace</span>(<span class="py-n">0</span>, <span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-v">pi</span>, <span class="py-n">8</span>, <span class="py-p">endpoint</span>=<span class="py-b">False</span>)
+<span class="py-k">for</span> <span class="py-v">how</span> <span class="py-k">in</span> <span class="py-s">'ABCD'</span>:
+    <span class="py-v">r</span> = [<span class="py-f">bands</span>(<span class="py-n">900</span> - <span class="py-v">D</span> * <span class="py-m">np</span>.<span class="py-f">exp</span>(-<span class="py-v">t</span> / <span class="py-v">tau</span>) + <span class="py-n">15</span> * <span class="py-m">np</span>.<span class="py-f">cos</span>(<span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-v">pi</span> * <span class="py-n">0.095</span> * <span class="py-v">t</span> + <span class="py-v">a</span>) + <span class="py-n">15</span> * <span class="py-m">np</span>.<span class="py-f">cos</span>(<span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-v">pi</span> * <span class="py-n">0.27</span> * <span class="py-v">t</span> + <span class="py-v">b</span>), <span class="py-v">how</span>)
+         <span class="py-k">for</span> <span class="py-v">D</span> <span class="py-k">in</span> (<span class="py-n">0</span>, <span class="py-n">100</span>, <span class="py-n">200</span>) <span class="py-k">for</span> <span class="py-v">tau</span> <span class="py-k">in</span> (<span class="py-n">30</span>, <span class="py-n">45</span>, <span class="py-n">60</span>, <span class="py-n">90</span>, <span class="py-n">150</span>, <span class="py-n">300</span>) <span class="py-k">for</span> <span class="py-v">a</span> <span class="py-k">in</span> <span class="py-v">ph</span> <span class="py-k">for</span> <span class="py-v">b</span> <span class="py-k">in</span> <span class="py-v">ph</span>]
+    <span class="py-f">print</span>(<span class="py-v">how</span>, <span class="py-f">round</span>(<span class="py-f">min</span>(<span class="py-v">r</span>), <span class="py-n">3</span>), <span class="py-f">round</span>(<span class="py-f">max</span>(<span class="py-v">r</span>), <span class="py-n">3</span>))</code></pre>
+<p class="rnote">โค้ดนี้คำนวณสองคอลัมน์แรกของตาราง<span class="se"> </span><code class="ic"><span class="py-m">np</span>.<span class="py-v">polyfit</span></code> ให้เส้นตรงที่ใกล้ที่สุด ซึ่งเท่ากับผลรวมของสองภาพฉายใน<a class="lref" href="#pr-2C">ข้อเสนอ 2C</a><span class="se"> </span>เปลี่ยน <code class="ic">/ <span class="py-v">P</span>[<span class="py-v">hf</span>].<span class="py-f">sum</span>()</code> เป็นการคืน <code class="ic"><span class="py-v">P</span>[<span class="py-v">lf</span>].<span class="py-f">sum</span>()</code> เพื่อหาคอลัมน์ LF</p>
 </details>
 </div>
 
@@ -849,23 +858,23 @@ for how in 'ABCD':
 <p><a class="lref" href="#pr-3D">ข้อเสนอ 3D</a> ให้ตำแหน่งเท่ากับ<a class="lref" href="#pr-3C">ข้อเสนอ 3C</a> ทุก R ตาม<a class="xref" href="c4p04.html#thm-4.4-3">ทฤษฎีบท 4.4-3</a> <span class="vd ok">ใช้ได้ดี</span><span class="se"> </span><span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">256</span></span></span></span></span> หน่วงไม่เกิน 0.77 วินาที ส่วน <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">512</span></span></span></span></span> ใช้งานน้อยลงราวหนึ่งในสามแต่หน่วงได้ถึง 1.80 วินาที<span class="se"> </span>ทั้งสองใช้งานน้อยกว่าการคำนวณตรง ซึ่งต้องการ 150 การคูณจริงต่อค่า และหน่วงน้อยที่สุดคือ 0.35 วินาที</p>
 <p class="cnext"><b>กรณีถัดไป</b> ถ้า<a class="lref" href="#pr-3C">ข้อเสนอ 3C</a> เติมศูนย์เป็น 2560 ค่าแทน 4096 เดาก่อนว่า <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span></span></span></span></span> ที่ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span> ใดบ้างจะไม่ถูก แล้วตรวจคำตอบในแบบฝึกหัดข้อ 6</p>
 <details class="redo"><summary>คำนวณซ้ำเอง (Python)</summary>
-<pre><code>import numpy as np
-W = [(-0.20, 0.15, 0.025), (-0.025, -0.15, 0.008), (0.0, 1.2, 0.010), (0.025, -0.30, 0.010), (0.25, 0.30, 0.050)]
-beat = lambda t: sum(a * np.exp(-0.5 * ((t - d) / s) ** 2) for d, a, s in W)
-R = np.round(250 * (0.28 + np.concatenate([[0], np.cumsum([.80, .84, .78, .82, .86, .80, .76, .82, .84, .80, .78, .79])]))).astype(int)
-n = np.arange(2500); x = sum(beat((n - p) / 250) for p in R); t = beat((np.arange(150) - 62) / 250)
-def peaks(r):
-    out = []
-    for i in range(1, len(r) - 1):
-        if r[i] &gt; r.max() / 2 and r[i] &gt;= r[i - 1] and r[i] &gt; r[i + 1]:
-            if out and i - out[-1] &lt; 50: out[-1] = i if r[i] &gt; r[out[-1]] else out[-1]
-            else: out.append(i)
-    return np.array(out)
-rA = np.real(np.fft.ifft(np.fft.fft(x) * np.fft.fft(t, 2500)))
-rC = np.real(np.fft.ifft(np.fft.fft(x, 4096) * np.conj(np.fft.fft(t, 4096))))[:2500]
-print(R, peaks(rA), peaks(rC) + 62, sep='\n')
-print([round(4 * (L * np.log2(L) + L) / (L - 149), 1) for L in (256, 512)])</code></pre>
-<p class="rnote">โค้ดนี้พิมพ์ R จริง ตำแหน่งของ<a class="lref" href="#pr-3A">ข้อเสนอ 3A</a> และ <a class="lref" href="#pr-3C">3C</a> และคอลัมน์งานของ<a class="lref" href="#pr-3D">ข้อเสนอ 3D</a><span class="se"> </span>ลองเปลี่ยน 4096 เป็น 2560 แล้วดูค่า <code>rC</code> ช่วงท้าย เพื่อตอบกรณีถัดไป</p>
+<pre class="py"><code><span class="py-k">import</span> <span class="py-m">numpy</span> <span class="py-k">as</span> <span class="py-m">np</span>
+<span class="py-v">W</span> = [(-<span class="py-n">0.20</span>, <span class="py-n">0.15</span>, <span class="py-n">0.025</span>), (-<span class="py-n">0.025</span>, -<span class="py-n">0.15</span>, <span class="py-n">0.008</span>), (<span class="py-n">0.0</span>, <span class="py-n">1.2</span>, <span class="py-n">0.010</span>), (<span class="py-n">0.025</span>, -<span class="py-n">0.30</span>, <span class="py-n">0.010</span>), (<span class="py-n">0.25</span>, <span class="py-n">0.30</span>, <span class="py-n">0.050</span>)]
+<span class="py-v">beat</span> = <span class="py-b">lambda</span> <span class="py-v">t</span>: <span class="py-f">sum</span>(<span class="py-v">a</span> * <span class="py-m">np</span>.<span class="py-f">exp</span>(-<span class="py-n">0.5</span> * ((<span class="py-v">t</span> - <span class="py-v">d</span>) / <span class="py-v">s</span>) ** <span class="py-n">2</span>) <span class="py-k">for</span> <span class="py-v">d</span>, <span class="py-v">a</span>, <span class="py-v">s</span> <span class="py-k">in</span> <span class="py-v">W</span>)
+<span class="py-v">R</span> = <span class="py-m">np</span>.<span class="py-f">round</span>(<span class="py-n">250</span> * (<span class="py-n">0.28</span> + <span class="py-m">np</span>.<span class="py-f">concatenate</span>([[<span class="py-n">0</span>], <span class="py-m">np</span>.<span class="py-f">cumsum</span>([<span class="py-n">.80</span>, <span class="py-n">.84</span>, <span class="py-n">.78</span>, <span class="py-n">.82</span>, <span class="py-n">.86</span>, <span class="py-n">.80</span>, <span class="py-n">.76</span>, <span class="py-n">.82</span>, <span class="py-n">.84</span>, <span class="py-n">.80</span>, <span class="py-n">.78</span>, <span class="py-n">.79</span>])]))).<span class="py-f">astype</span>(<span class="py-v">int</span>)
+<span class="py-v">n</span> = <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-n">2500</span>); <span class="py-v">x</span> = <span class="py-f">sum</span>(<span class="py-f">beat</span>((<span class="py-v">n</span> - <span class="py-v">p</span>) / <span class="py-n">250</span>) <span class="py-k">for</span> <span class="py-v">p</span> <span class="py-k">in</span> <span class="py-v">R</span>); <span class="py-v">t</span> = <span class="py-f">beat</span>((<span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-n">150</span>) - <span class="py-n">62</span>) / <span class="py-n">250</span>)
+<span class="py-b">def</span> <span class="py-f">peaks</span>(<span class="py-v">r</span>):
+    <span class="py-v">out</span> = []
+    <span class="py-k">for</span> <span class="py-v">i</span> <span class="py-k">in</span> <span class="py-f">range</span>(<span class="py-n">1</span>, <span class="py-f">len</span>(<span class="py-v">r</span>) - <span class="py-n">1</span>):
+        <span class="py-k">if</span> <span class="py-v">r</span>[<span class="py-v">i</span>] &gt; <span class="py-v">r</span>.<span class="py-f">max</span>() / <span class="py-n">2</span> <span class="py-k">and</span> <span class="py-v">r</span>[<span class="py-v">i</span>] &gt;= <span class="py-v">r</span>[<span class="py-v">i</span> - <span class="py-n">1</span>] <span class="py-k">and</span> <span class="py-v">r</span>[<span class="py-v">i</span>] &gt; <span class="py-v">r</span>[<span class="py-v">i</span> + <span class="py-n">1</span>]:
+            <span class="py-k">if</span> <span class="py-v">out</span> <span class="py-k">and</span> <span class="py-v">i</span> - <span class="py-v">out</span>[-<span class="py-n">1</span>] &lt; <span class="py-n">50</span>: <span class="py-v">out</span>[-<span class="py-n">1</span>] = <span class="py-v">i</span> <span class="py-k">if</span> <span class="py-v">r</span>[<span class="py-v">i</span>] &gt; <span class="py-v">r</span>[<span class="py-v">out</span>[-<span class="py-n">1</span>]] <span class="py-k">else</span> <span class="py-v">out</span>[-<span class="py-n">1</span>]
+            <span class="py-k">else</span>: <span class="py-v">out</span>.<span class="py-f">append</span>(<span class="py-v">i</span>)
+    <span class="py-k">return</span> <span class="py-m">np</span>.<span class="py-f">array</span>(<span class="py-v">out</span>)
+<span class="py-v">rA</span> = <span class="py-m">np</span>.<span class="py-f">real</span>(<span class="py-m">np</span>.<span class="py-m">fft</span>.<span class="py-f">ifft</span>(<span class="py-m">np</span>.<span class="py-m">fft</span>.<span class="py-f">fft</span>(<span class="py-v">x</span>) * <span class="py-m">np</span>.<span class="py-m">fft</span>.<span class="py-f">fft</span>(<span class="py-v">t</span>, <span class="py-n">2500</span>)))
+<span class="py-v">rC</span> = <span class="py-m">np</span>.<span class="py-f">real</span>(<span class="py-m">np</span>.<span class="py-m">fft</span>.<span class="py-f">ifft</span>(<span class="py-m">np</span>.<span class="py-m">fft</span>.<span class="py-f">fft</span>(<span class="py-v">x</span>, <span class="py-n">4096</span>) * <span class="py-m">np</span>.<span class="py-f">conj</span>(<span class="py-m">np</span>.<span class="py-m">fft</span>.<span class="py-f">fft</span>(<span class="py-v">t</span>, <span class="py-n">4096</span>))))[:<span class="py-n">2500</span>]
+<span class="py-f">print</span>(<span class="py-v">R</span>, <span class="py-f">peaks</span>(<span class="py-v">rA</span>), <span class="py-f">peaks</span>(<span class="py-v">rC</span>) + <span class="py-n">62</span>, <span class="py-p">sep</span>=<span class="py-s">'\n'</span>)
+<span class="py-f">print</span>([<span class="py-f">round</span>(<span class="py-n">4</span> * (<span class="py-v">L</span> * <span class="py-m">np</span>.<span class="py-f">log2</span>(<span class="py-v">L</span>) + <span class="py-v">L</span>) / (<span class="py-v">L</span> - <span class="py-n">149</span>), <span class="py-n">1</span>) <span class="py-k">for</span> <span class="py-v">L</span> <span class="py-k">in</span> (<span class="py-n">256</span>, <span class="py-n">512</span>)])</code></pre>
+<p class="rnote">โค้ดนี้พิมพ์ R จริง ตำแหน่งของ<a class="lref" href="#pr-3A">ข้อเสนอ 3A</a> และ <a class="lref" href="#pr-3C">3C</a> และคอลัมน์งานของ<a class="lref" href="#pr-3D">ข้อเสนอ 3D</a><span class="se"> </span>ถ้าเปลี่ยน 4096 เป็น 2560 แล้วดูค่า <code class="ic"><span class="py-v">rC</span></code> ช่วงท้าย โค้ดจะให้ผลของกรณีถัดไป ซึ่งใช้ตรวจคำตอบที่หาด้วยมือได้</p>
 </details>
 </div>
 
@@ -947,19 +956,19 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v600 v585 h43z"/></svg></span></span>
 <p>หน้าต่างแฮนน์ต้องการอย่างน้อย 5 วินาที ซึ่งได้ 0.5 พอดีที่ขอบของ 4ก* จึงไม่ผ่าน 4ข*<span class="se"> </span>ที่ 6 วินาที หน้าต่างสี่เหลี่ยมแย่กว่าที่ 5 วินาที เพราะที่ 5 วินาทีทุกปุ่มอื่นตกที่ศูนย์ของ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.109em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> พอดี ส่วนที่ 6 วินาทีปุ่มข้างเคียงห่าง 1.2 ช่อง ซึ่งอยู่บนกลีบข้าง</p>
 <p class="cnext"><b>กรณีถัดไป</b> ถ้าปุ่มห่างกัน 0.4 Hz แทน 0.2 Hz เดาก่อนว่าหน้าต่างสี่เหลี่ยมต้องยาวราวเท่าใด แล้วตรวจคำตอบในแบบฝึกหัดข้อ 7</p>
 <details class="redo"><summary>คำนวณซ้ำเอง (Python)</summary>
-<pre><code>import numpy as np
-tg, ph = 8.0 + 0.2 * np.arange(40), np.linspace(0, 2 * np.pi, 12, endpoint=False)
-def worst(N, hann=False):
-    n = np.arange(N); w = 0.5 - 0.5 * np.cos(2 * np.pi * n / N) if hann else np.ones(N)
-    E = np.exp(-2j * np.pi * np.outer(tg, n) / 250) * w; r = 0
-    for i, f in enumerate(tg):
-        A = np.abs(np.cos(2 * np.pi * f * n[None, :] / 250 + ph[:, None]) @ E.T)
-        r = max(r, (np.delete(A, i, axis=1).max(1) / A[:, i]).max())
-    return r
-for T in (1, 2, 3, 4, 5, 6):
-    print(T, round(worst(250 * T), 3), round(worst(250 * T, True), 3))
-print(next(N for N in range(700, 800) if worst(N) &lt;= 0.5))</code></pre>
-<p class="rnote">โค้ดนี้คำนวณทุกหลักในตาราง และ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span></span> ที่สั้นที่สุดของหน้าต่างสี่เหลี่ยม<span class="se"> </span>ลองเปลี่ยน <code>0.2 * np.arange(40)</code> เป็น <code>0.4 * np.arange(20)</code> และช่วงของ <code>range</code> เป็น 300 ถึง 420 เพื่อตอบกรณีถัดไป</p>
+<pre class="py"><code><span class="py-k">import</span> <span class="py-m">numpy</span> <span class="py-k">as</span> <span class="py-m">np</span>
+<span class="py-v">tg</span>, <span class="py-p">ph</span> = <span class="py-n">8.0</span> + <span class="py-n">0.2</span> * <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-n">40</span>), <span class="py-m">np</span>.<span class="py-f">linspace</span>(<span class="py-n">0</span>, <span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-v">pi</span>, <span class="py-n">12</span>, <span class="py-p">endpoint</span>=<span class="py-b">False</span>)
+<span class="py-b">def</span> <span class="py-f">worst</span>(<span class="py-v">N</span>, <span class="py-p">hann</span>=<span class="py-b">False</span>):
+    <span class="py-v">n</span> = <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-v">N</span>); <span class="py-v">w</span> = <span class="py-n">0.5</span> - <span class="py-n">0.5</span> * <span class="py-m">np</span>.<span class="py-f">cos</span>(<span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-v">pi</span> * <span class="py-v">n</span> / <span class="py-v">N</span>) <span class="py-k">if</span> <span class="py-v">hann</span> <span class="py-k">else</span> <span class="py-m">np</span>.<span class="py-f">ones</span>(<span class="py-v">N</span>)
+    <span class="py-v">E</span> = <span class="py-m">np</span>.<span class="py-f">exp</span>(-<span class="py-n">2j</span> * <span class="py-m">np</span>.<span class="py-v">pi</span> * <span class="py-m">np</span>.<span class="py-f">outer</span>(<span class="py-v">tg</span>, <span class="py-v">n</span>) / <span class="py-n">250</span>) * <span class="py-v">w</span>; <span class="py-v">r</span> = <span class="py-n">0</span>
+    <span class="py-k">for</span> <span class="py-v">i</span>, <span class="py-v">f</span> <span class="py-k">in</span> <span class="py-f">enumerate</span>(<span class="py-v">tg</span>):
+        <span class="py-v">A</span> = <span class="py-m">np</span>.<span class="py-f">abs</span>(<span class="py-m">np</span>.<span class="py-f">cos</span>(<span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-v">pi</span> * <span class="py-v">f</span> * <span class="py-v">n</span>[<span class="py-b">None</span>, :] / <span class="py-n">250</span> + <span class="py-v">ph</span>[:, <span class="py-b">None</span>]) @ <span class="py-v">E</span>.<span class="py-v">T</span>)
+        <span class="py-v">r</span> = <span class="py-f">max</span>(<span class="py-v">r</span>, (<span class="py-m">np</span>.<span class="py-f">delete</span>(<span class="py-v">A</span>, <span class="py-v">i</span>, <span class="py-p">axis</span>=<span class="py-n">1</span>).<span class="py-f">max</span>(<span class="py-n">1</span>) / <span class="py-v">A</span>[:, <span class="py-v">i</span>]).<span class="py-f">max</span>())
+    <span class="py-k">return</span> <span class="py-v">r</span>
+<span class="py-k">for</span> <span class="py-v">T</span> <span class="py-k">in</span> (<span class="py-n">1</span>, <span class="py-n">2</span>, <span class="py-n">3</span>, <span class="py-n">4</span>, <span class="py-n">5</span>, <span class="py-n">6</span>):
+    <span class="py-f">print</span>(<span class="py-v">T</span>, <span class="py-f">round</span>(<span class="py-f">worst</span>(<span class="py-n">250</span> * <span class="py-v">T</span>), <span class="py-n">3</span>), <span class="py-f">round</span>(<span class="py-f">worst</span>(<span class="py-n">250</span> * <span class="py-v">T</span>, <span class="py-b">True</span>), <span class="py-n">3</span>))
+<span class="py-f">print</span>(<span class="py-f">next</span>(<span class="py-v">N</span> <span class="py-k">for</span> <span class="py-v">N</span> <span class="py-k">in</span> <span class="py-f">range</span>(<span class="py-n">700</span>, <span class="py-n">800</span>) <span class="py-k">if</span> <span class="py-f">worst</span>(<span class="py-v">N</span>) &lt;= <span class="py-n">0.5</span>))</code></pre>
+<p class="rnote">โค้ดนี้คำนวณทุกหลักในตาราง และ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span></span> ที่สั้นที่สุดของหน้าต่างสี่เหลี่ยม<span class="se"> </span>ถ้าเปลี่ยน <code class="ic"><span class="py-n">0.2</span> * <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-n">40</span>)</code> เป็น <code class="ic"><span class="py-n">0.4</span> * <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-n">20</span>)</code> และช่วงของ <code class="ic"><span class="py-v">range</span></code> เป็น 300 ถึง 420 โค้ดจะให้ผลของกรณีถัดไป ซึ่งใช้ตรวจคำตอบที่หาด้วยมือได้</p>
 </details>
 </div>
 

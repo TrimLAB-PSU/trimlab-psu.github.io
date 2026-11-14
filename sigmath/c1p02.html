@@ -120,7 +120,7 @@ ol.steps li{margin-bottom:.6em}
 .vd.ok{color:var(--paper);background:var(--accent)}
 details.redo{margin:4px 0 12px;font-family:var(--sans);font-size:14px}
 details.redo summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13px;letter-spacing:.03em}
-details.redo pre{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;
+details.redo pre,div.example pre{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;
   font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
 details.redo .rnote{color:var(--muted);font-size:13px;margin:6px 0 0}
 
@@ -382,7 +382,7 @@ ul.essb{margin:.25em 0 .2em;padding-left:1.25em}ul.essb li{margin:.55em 0;line-h
   }
   html.night{--muted:#9faea3}
   html.night .page{box-shadow:0 0 0 1px #26302a, 0 18px 50px -30px rgba(0,0,0,.7)}
-  html.night details.redo pre{background:var(--box)}
+  html.night details.redo pre,html.night div.example pre{background:var(--box)}
   html.night body.hide .rd:not(.shown){background:repeating-linear-gradient(90deg,var(--rule) 0 6px,transparent 6px 10px) bottom/100% 1.5px no-repeat, rgba(143,208,169,.09)}
   html.night body.hide rect.slot{fill:rgba(143,208,169,.10)}
   html.night .figtap{background:rgba(143,208,169,.12)}
@@ -502,6 +502,15 @@ code.ic .ns{color:#267f99} code.ic .fn{color:#795e26}
 html.night code.ic{background:#1e1e1e;border-color:#3c3c3c;color:#d4d4d4}
 html.night code.ic .ns{color:#4ec9b0} html.night code.ic .fn{color:#dcdcaa}
 @media print{code.ic{background:none;border-color:#ccc}}
+/* Python tokens in code blocks and inline code (VS Code Light Modern / Dark Modern) */
+pre.py{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;color:#1f1f1f}
+pre.py .py-c,code.ic .py-c{color:#008000} pre.py .py-s,code.ic .py-s{color:#a31515} pre.py .py-n,code.ic .py-n{color:#098658}
+pre.py .py-k,code.ic .py-k{color:#af00db} pre.py .py-b,code.ic .py-b{color:#0000ff} pre.py .py-f,code.ic .py-f{color:#795e26}
+pre.py .py-v,code.ic .py-v,pre.py .py-p,code.ic .py-p{color:#001080} pre.py .py-m,code.ic .py-m{color:#267f99}
+html.night pre.py{background:#1e1e1e;border-color:#3c3c3c;color:#d4d4d4}
+html.night pre.py .py-c,html.night code.ic .py-c{color:#6a9955} html.night pre.py .py-s,html.night code.ic .py-s{color:#ce9178} html.night pre.py .py-n,html.night code.ic .py-n{color:#b5cea8}
+html.night pre.py .py-k,html.night code.ic .py-k{color:#c586c0} html.night pre.py .py-b,html.night code.ic .py-b{color:#569cd6} html.night pre.py .py-f,html.night code.ic .py-f{color:#dcdcaa}
+html.night pre.py .py-v,html.night code.ic .py-v,html.night pre.py .py-p,html.night code.ic .py-p{color:#9cdcfe} html.night pre.py .py-m,html.night code.ic .py-m{color:#4ec9b0}
 </style>
 <script>(function(){var r=document.documentElement,t=null,n=null;try{t=localStorage.getItem("theme");n=localStorage.getItem("night")}catch(e){}
 r.setAttribute("data-theme",t||"green");var on=n?n==="1":(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);if(on)r.classList.add("night");})();</script>
@@ -1537,15 +1546,15 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p>จากผลข้างต้น <a class="lref" href="#pr-3B">ข้อเสนอ 3B</a> ใช้ได้เมื่อความถี่ต่างกัน และหน้าต่างยาวเป็นจำนวนเต็มเท่าของคาบร่วม<span class="se"> </span>ถ้าความถี่ใกล้กันมาก คาบร่วมยาวมาก RMS ในหน้าต่างสั้นของสัญญาณรบกวนสองแหล่งที่ความถี่ใกล้กันจึงขึ้นลงได้ แม้แหล่งทั้งสองไม่เปลี่ยนเลย</p>
 <p class="cnext"><b>กรณีถัดไป</b> 50 Hz กับ 50.5 Hz ที่แอมพลิจูด 0.3 mV เท่ากัน ยาว 2 วินาทีเท่าเดิม<span class="se"> </span>เดาก่อนว่า RMS ทั้งบันทึกเป็นเท่าใด แล้วตรวจคำตอบในแบบฝึกหัดข้อ 8</p>
 <details class="redo"><summary>คำนวณซ้ำเอง (Python)</summary>
-<pre><code>import numpy as np
-fs = 1000; t = np.arange(2 * fs) / fs
-pairs = {1: (50, 0, 50, -60), 2: (49, 0, 51, 0), 3: (50, 0, 150, 0)}
-for case, (f1, p1, f2, p2) in pairs.items():
-    x = 0.3 * np.cos(2 * np.pi * f1 * t + np.radians(p1)) + 0.3 * np.cos(2 * np.pi * f2 * t + np.radians(p2))
-    r = np.sqrt(np.convolve(x**2, np.ones(100) / 100, mode='same'))[(t &gt;= 0.5) &amp; (t &lt; 1.5)]
-    period = next(s for s in range(1, fs + 1) if np.max(np.abs(x[s:] - x[:-s])) &lt; 1e-9)
-    print(case, np.sqrt(np.mean(x**2)).round(3), r.min().round(3), r.max().round(3), period)</code></pre>
-<p class="rnote">โค้ดนี้คำนวณทุกหลักในตาราง<span class="se"> </span>คาบพิมพ์เป็นจำนวนค่าตัวอย่าง ซึ่งเท่ากับมิลลิวินาทีเพราะชักตัวอย่าง 1,000 ค่าต่อวินาที<span class="se"> </span>ลองเปลี่ยนเฟสของกรณี 1 เป็นค่าอื่นแล้วเทียบกับ<a class="xref" href="#cor-1.2-3">บทแทรก 1.2-3</a></p>
+<pre class="py"><code><span class="py-k">import</span> <span class="py-m">numpy</span> <span class="py-k">as</span> <span class="py-m">np</span>
+<span class="py-v">fs</span> = <span class="py-n">1000</span>; <span class="py-v">t</span> = <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-n">2</span> * <span class="py-v">fs</span>) / <span class="py-v">fs</span>
+<span class="py-v">pairs</span> = {<span class="py-n">1</span>: (<span class="py-n">50</span>, <span class="py-n">0</span>, <span class="py-n">50</span>, -<span class="py-n">60</span>), <span class="py-n">2</span>: (<span class="py-n">49</span>, <span class="py-n">0</span>, <span class="py-n">51</span>, <span class="py-n">0</span>), <span class="py-n">3</span>: (<span class="py-n">50</span>, <span class="py-n">0</span>, <span class="py-n">150</span>, <span class="py-n">0</span>)}
+<span class="py-k">for</span> <span class="py-v">case</span>, (<span class="py-v">f1</span>, <span class="py-v">p1</span>, <span class="py-v">f2</span>, <span class="py-v">p2</span>) <span class="py-k">in</span> <span class="py-v">pairs</span>.<span class="py-f">items</span>():
+    <span class="py-v">x</span> = <span class="py-n">0.3</span> * <span class="py-m">np</span>.<span class="py-f">cos</span>(<span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-v">pi</span> * <span class="py-v">f1</span> * <span class="py-v">t</span> + <span class="py-m">np</span>.<span class="py-f">radians</span>(<span class="py-v">p1</span>)) + <span class="py-n">0.3</span> * <span class="py-m">np</span>.<span class="py-f">cos</span>(<span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-v">pi</span> * <span class="py-v">f2</span> * <span class="py-v">t</span> + <span class="py-m">np</span>.<span class="py-f">radians</span>(<span class="py-v">p2</span>))
+    <span class="py-v">r</span> = <span class="py-m">np</span>.<span class="py-f">sqrt</span>(<span class="py-m">np</span>.<span class="py-f">convolve</span>(<span class="py-v">x</span>**<span class="py-n">2</span>, <span class="py-m">np</span>.<span class="py-f">ones</span>(<span class="py-n">100</span>) / <span class="py-n">100</span>, <span class="py-p">mode</span>=<span class="py-s">'same'</span>))[(<span class="py-v">t</span> &gt;= <span class="py-n">0.5</span>) &amp; (<span class="py-v">t</span> &lt; <span class="py-n">1.5</span>)]
+    <span class="py-v">period</span> = <span class="py-f">next</span>(<span class="py-v">s</span> <span class="py-k">for</span> <span class="py-v">s</span> <span class="py-k">in</span> <span class="py-f">range</span>(<span class="py-n">1</span>, <span class="py-v">fs</span> + <span class="py-n">1</span>) <span class="py-k">if</span> <span class="py-m">np</span>.<span class="py-f">max</span>(<span class="py-m">np</span>.<span class="py-f">abs</span>(<span class="py-v">x</span>[<span class="py-v">s</span>:] - <span class="py-v">x</span>[:-<span class="py-v">s</span>])) &lt; <span class="py-n">1e-9</span>)
+    <span class="py-f">print</span>(<span class="py-v">case</span>, <span class="py-m">np</span>.<span class="py-f">sqrt</span>(<span class="py-m">np</span>.<span class="py-f">mean</span>(<span class="py-v">x</span>**<span class="py-n">2</span>)).<span class="py-f">round</span>(<span class="py-n">3</span>), <span class="py-v">r</span>.<span class="py-f">min</span>().<span class="py-f">round</span>(<span class="py-n">3</span>), <span class="py-v">r</span>.<span class="py-f">max</span>().<span class="py-f">round</span>(<span class="py-n">3</span>), <span class="py-v">period</span>)</code></pre>
+<p class="rnote">โค้ดนี้คำนวณทุกหลักในตาราง<span class="se"> </span>คาบพิมพ์เป็นจำนวนค่าตัวอย่าง ซึ่งเท่ากับมิลลิวินาทีเพราะชักตัวอย่าง 1,000 ค่าต่อวินาที</p>
 </details>
 </div>
 

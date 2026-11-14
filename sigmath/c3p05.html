@@ -120,7 +120,7 @@ ol.steps li{margin-bottom:.6em}
 .vd.ok{color:var(--paper);background:var(--accent)}
 details.redo{margin:4px 0 12px;font-family:var(--sans);font-size:14px}
 details.redo summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13px;letter-spacing:.03em}
-details.redo pre{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;
+details.redo pre,div.example pre{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;
   font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
 details.redo .rnote{color:var(--muted);font-size:13px;margin:6px 0 0}
 
@@ -382,7 +382,7 @@ ul.essb{margin:.25em 0 .2em;padding-left:1.25em}ul.essb li{margin:.55em 0;line-h
   }
   html.night{--muted:#9faea3}
   html.night .page{box-shadow:0 0 0 1px #26302a, 0 18px 50px -30px rgba(0,0,0,.7)}
-  html.night details.redo pre{background:var(--box)}
+  html.night details.redo pre,html.night div.example pre{background:var(--box)}
   html.night body.hide .rd:not(.shown){background:repeating-linear-gradient(90deg,var(--rule) 0 6px,transparent 6px 10px) bottom/100% 1.5px no-repeat, rgba(143,208,169,.09)}
   html.night body.hide rect.slot{fill:rgba(143,208,169,.10)}
   html.night .figtap{background:rgba(143,208,169,.12)}
@@ -502,6 +502,15 @@ code.ic .ns{color:#267f99} code.ic .fn{color:#795e26}
 html.night code.ic{background:#1e1e1e;border-color:#3c3c3c;color:#d4d4d4}
 html.night code.ic .ns{color:#4ec9b0} html.night code.ic .fn{color:#dcdcaa}
 @media print{code.ic{background:none;border-color:#ccc}}
+/* Python tokens in code blocks and inline code (VS Code Light Modern / Dark Modern) */
+pre.py{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;color:#1f1f1f}
+pre.py .py-c,code.ic .py-c{color:#008000} pre.py .py-s,code.ic .py-s{color:#a31515} pre.py .py-n,code.ic .py-n{color:#098658}
+pre.py .py-k,code.ic .py-k{color:#af00db} pre.py .py-b,code.ic .py-b{color:#0000ff} pre.py .py-f,code.ic .py-f{color:#795e26}
+pre.py .py-v,code.ic .py-v,pre.py .py-p,code.ic .py-p{color:#001080} pre.py .py-m,code.ic .py-m{color:#267f99}
+html.night pre.py{background:#1e1e1e;border-color:#3c3c3c;color:#d4d4d4}
+html.night pre.py .py-c,html.night code.ic .py-c{color:#6a9955} html.night pre.py .py-s,html.night code.ic .py-s{color:#ce9178} html.night pre.py .py-n,html.night code.ic .py-n{color:#b5cea8}
+html.night pre.py .py-k,html.night code.ic .py-k{color:#c586c0} html.night pre.py .py-b,html.night code.ic .py-b{color:#569cd6} html.night pre.py .py-f,html.night code.ic .py-f{color:#dcdcaa}
+html.night pre.py .py-v,html.night code.ic .py-v,html.night pre.py .py-p,html.night code.ic .py-p{color:#9cdcfe} html.night pre.py .py-m,html.night code.ic .py-m{color:#4ec9b0}
 </style>
 <script>(function(){var r=document.documentElement,t=null,n=null;try{t=localStorage.getItem("theme");n=localStorage.getItem("night")}catch(e){}
 r.setAttribute("data-theme",t||"green");var on=n?n==="1":(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);if(on)r.classList.add("night");})();</script>
@@ -794,7 +803,7 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v1200 v585 h43z"/></svg></span></span
 
 <aside class="ahead">
 <h4>ในงานจริง</h4>
-<p><code class="ic"><span class="ns">scipy.<wbr>signal.<wbr></span><span class="fn">decimate</span></code>(x, 5) ค่าเริ่มต้นกรองด้วยตัวกรอง IIR แบบเชบีเชฟอันดับ 8 ที่ตัดที่ 0.8 เท่าของความถี่พับใหม่ ซึ่งคือ 40 Hz พอดี กรองไปและกลับให้ไม่เลื่อนเฟส แล้วเก็บทุกค่าที่ห้า และ <code class="ic"><span class="ns">scipy.<wbr>signal.<wbr></span><span class="fn">resample_poly</span></code>(x, 1, 5) กรองด้วยตัวกรอง FIR ที่คูณหน้าต่าง ทั้งสองแบบทำตามลำดับกรองก่อนแล้วจึงเก็บ<span class="se"> </span>การใช้ x[::5] ในโปรแกรมคือ<a class="lref" href="#pr-3A">ข้อเสนอ 3A</a><span class="se"> </span>ส่วนการเพิ่มอัตราด้วยการแทรกค่าศูนย์แล้วกรองด้วยตัวกรองต่ำผ่านคือสูตร sinc ที่ตัดด้วยหน้าต่าง ซึ่งเป็นวิธีที่โปรแกรมใช้เติมค่าระหว่างตัวอย่างจริง</p>
+<p><code class="ic"><span class="ns">scipy.<wbr>signal.<wbr></span><span class="fn">decimate</span>(<span class="py-v">x</span>, <span class="py-n">5</span>)</code> ค่าเริ่มต้นกรองด้วยตัวกรอง IIR แบบเชบีเชฟอันดับ 8 ที่ตัดที่ 0.8 เท่าของความถี่พับใหม่ ซึ่งคือ 40 Hz พอดี กรองไปและกลับให้ไม่เลื่อนเฟส แล้วเก็บทุกค่าที่ห้า และ <code class="ic"><span class="ns">scipy.<wbr>signal.<wbr></span><span class="fn">resample_poly</span>(<span class="py-v">x</span>, <span class="py-n">1</span>, <span class="py-n">5</span>)</code> กรองด้วยตัวกรอง FIR ที่คูณหน้าต่าง ทั้งสองแบบทำตามลำดับกรองก่อนแล้วจึงเก็บ<span class="se"> </span>การใช้ <code class="ic"><span class="py-v">x</span>[::<span class="py-n">5</span>]</code> ในโปรแกรมคือ<a class="lref" href="#pr-3A">ข้อเสนอ 3A</a><span class="se"> </span>ส่วนการเพิ่มอัตราด้วยการแทรกค่าศูนย์แล้วกรองด้วยตัวกรองต่ำผ่านคือสูตร sinc ที่ตัดด้วยหน้าต่าง ซึ่งเป็นวิธีที่โปรแกรมใช้เติมค่าระหว่างตัวอย่างจริง</p>
 <ul class="traps">
 <li>P01 ลดอัตราชักตัวอย่างด้วยการเก็บทุกค่าที่ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span></span> โดยไม่กรองก่อน ทำให้สัญญาณรบกวนความถี่สูงพับลงมาปนกับ ECG อย่างแยกไม่ได้ เหมือนไซน์ 80 Hz ที่กลายเป็น 20 Hz</li>
 <li>P15 ใช้สูตรของตอนนี้กับข้อมูลที่ชักตัวอย่างไม่สม่ำเสมอ เช่น ช่วง RR ซึ่งได้ค่าใหม่เฉพาะตอนหัวใจเต้น ทั้งที่<a class="xref" href="#thm-3.5-1">ทฤษฎีบท 3.5-1</a> และ 3.5-2 ต้องการช่วงห่าง <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span></span></span></span></span> คงที่</li>

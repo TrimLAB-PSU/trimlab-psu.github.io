@@ -120,7 +120,7 @@ ol.steps li{margin-bottom:.6em}
 .vd.ok{color:var(--paper);background:var(--accent)}
 details.redo{margin:4px 0 12px;font-family:var(--sans);font-size:14px}
 details.redo summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13px;letter-spacing:.03em}
-details.redo pre{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;
+details.redo pre,div.example pre{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;
   font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
 details.redo .rnote{color:var(--muted);font-size:13px;margin:6px 0 0}
 
@@ -382,7 +382,7 @@ ul.essb{margin:.25em 0 .2em;padding-left:1.25em}ul.essb li{margin:.55em 0;line-h
   }
   html.night{--muted:#9faea3}
   html.night .page{box-shadow:0 0 0 1px #26302a, 0 18px 50px -30px rgba(0,0,0,.7)}
-  html.night details.redo pre{background:var(--box)}
+  html.night details.redo pre,html.night div.example pre{background:var(--box)}
   html.night body.hide .rd:not(.shown){background:repeating-linear-gradient(90deg,var(--rule) 0 6px,transparent 6px 10px) bottom/100% 1.5px no-repeat, rgba(143,208,169,.09)}
   html.night body.hide rect.slot{fill:rgba(143,208,169,.10)}
   html.night .figtap{background:rgba(143,208,169,.12)}
@@ -502,6 +502,15 @@ code.ic .ns{color:#267f99} code.ic .fn{color:#795e26}
 html.night code.ic{background:#1e1e1e;border-color:#3c3c3c;color:#d4d4d4}
 html.night code.ic .ns{color:#4ec9b0} html.night code.ic .fn{color:#dcdcaa}
 @media print{code.ic{background:none;border-color:#ccc}}
+/* Python tokens in code blocks and inline code (VS Code Light Modern / Dark Modern) */
+pre.py{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;color:#1f1f1f}
+pre.py .py-c,code.ic .py-c{color:#008000} pre.py .py-s,code.ic .py-s{color:#a31515} pre.py .py-n,code.ic .py-n{color:#098658}
+pre.py .py-k,code.ic .py-k{color:#af00db} pre.py .py-b,code.ic .py-b{color:#0000ff} pre.py .py-f,code.ic .py-f{color:#795e26}
+pre.py .py-v,code.ic .py-v,pre.py .py-p,code.ic .py-p{color:#001080} pre.py .py-m,code.ic .py-m{color:#267f99}
+html.night pre.py{background:#1e1e1e;border-color:#3c3c3c;color:#d4d4d4}
+html.night pre.py .py-c,html.night code.ic .py-c{color:#6a9955} html.night pre.py .py-s,html.night code.ic .py-s{color:#ce9178} html.night pre.py .py-n,html.night code.ic .py-n{color:#b5cea8}
+html.night pre.py .py-k,html.night code.ic .py-k{color:#c586c0} html.night pre.py .py-b,html.night code.ic .py-b{color:#569cd6} html.night pre.py .py-f,html.night code.ic .py-f{color:#dcdcaa}
+html.night pre.py .py-v,html.night code.ic .py-v,html.night pre.py .py-p,html.night code.ic .py-p{color:#9cdcfe} html.night pre.py .py-m,html.night code.ic .py-m{color:#4ec9b0}
 </style>
 <script>(function(){var r=document.documentElement,t=null,n=null;try{t=localStorage.getItem("theme");n=localStorage.getItem("night")}catch(e){}
 r.setAttribute("data-theme",t||"green");var on=n?n==="1":(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);if(on)r.classList.add("night");})();</script>
@@ -809,19 +818,19 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v1200 v585 h43z"/></svg></span></span
 </figure>
 <p class="cnext"><b>กรณีถัดไป</b> ถ้าไฟบ้านที่ขั้วเป็น 10 mV แทน 2 mV เดาก่อนว่ากรณีใดยังผ่าน 1ก* แล้วตรวจคำตอบในแบบฝึกหัดข้อ 6</p>
 <details class="redo"><summary>คำนวณซ้ำเอง (Python)</summary>
-<pre><code>import numpy as np
-waves = [(-0.20, 0.15, 0.025), (-0.025, -0.15, 0.008), (0, 1.2, 0.010), (0.025, -0.30, 0.010), (0.25, 0.30, 0.050)]
-beats = np.arange(0.4037, 9.6, 60 / 72); m = lambda t: 2 * np.cos(2 * np.pi * 50 * t + np.pi / 6)
-ecg = lambda t: sum(a * np.exp(-0.5 * ((t - b - d) / s) ** 2) for b in beats for d, a, s in waves)
-for kind, fs in (('none', 500), ('none', 2000), ('avg', 500), ('sim', 500)):
-    tA = np.arange(10 * fs) / fs; tB = tA + (0 if kind == 'sim' else 0.5 / fs)
-    for e, mm in ((0, 1), (1, 0)):
-        A = -0.4 * e * ecg(tA) + mm * m(tA); B = 0.6 * e * ecg(tB) + mm * m(tB); t = tB
-        if kind == 'avg': A = (A[:-1] + A[1:]) / 2; B = B[:-1]; t = tB[:-1]
-        d = B - A - e * ecg(t)
-        print(kind, fs, round(float(abs(2 * np.mean(d * np.exp(-2j * np.pi * 50 * t)))), 3) if mm else
-              (round(float(1000 * np.sqrt(np.mean(d ** 2))), 2), round(float(1000 * abs(d).max()), 2)))</code></pre>
-<p class="rnote">โค้ดนี้คำนวณทุกหลักในตาราง<span class="se"> </span>ลองเปลี่ยน 2 ใน <code>m</code> เป็น 10 เพื่อตอบกรณีถัดไป</p>
+<pre class="py"><code><span class="py-k">import</span> <span class="py-m">numpy</span> <span class="py-k">as</span> <span class="py-m">np</span>
+<span class="py-v">waves</span> = [(-<span class="py-n">0.20</span>, <span class="py-n">0.15</span>, <span class="py-n">0.025</span>), (-<span class="py-n">0.025</span>, -<span class="py-n">0.15</span>, <span class="py-n">0.008</span>), (<span class="py-n">0</span>, <span class="py-n">1.2</span>, <span class="py-n">0.010</span>), (<span class="py-n">0.025</span>, -<span class="py-n">0.30</span>, <span class="py-n">0.010</span>), (<span class="py-n">0.25</span>, <span class="py-n">0.30</span>, <span class="py-n">0.050</span>)]
+<span class="py-v">beats</span> = <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-n">0.4037</span>, <span class="py-n">9.6</span>, <span class="py-n">60</span> / <span class="py-n">72</span>); <span class="py-v">m</span> = <span class="py-b">lambda</span> <span class="py-v">t</span>: <span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-f">cos</span>(<span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-v">pi</span> * <span class="py-n">50</span> * <span class="py-v">t</span> + <span class="py-m">np</span>.<span class="py-v">pi</span> / <span class="py-n">6</span>)
+<span class="py-v">ecg</span> = <span class="py-b">lambda</span> <span class="py-v">t</span>: <span class="py-f">sum</span>(<span class="py-v">a</span> * <span class="py-m">np</span>.<span class="py-f">exp</span>(-<span class="py-n">0.5</span> * ((<span class="py-v">t</span> - <span class="py-v">b</span> - <span class="py-v">d</span>) / <span class="py-v">s</span>) ** <span class="py-n">2</span>) <span class="py-k">for</span> <span class="py-v">b</span> <span class="py-k">in</span> <span class="py-v">beats</span> <span class="py-k">for</span> <span class="py-v">d</span>, <span class="py-v">a</span>, <span class="py-v">s</span> <span class="py-k">in</span> <span class="py-v">waves</span>)
+<span class="py-k">for</span> <span class="py-v">kind</span>, <span class="py-v">fs</span> <span class="py-k">in</span> ((<span class="py-s">'none'</span>, <span class="py-n">500</span>), (<span class="py-s">'none'</span>, <span class="py-n">2000</span>), (<span class="py-s">'avg'</span>, <span class="py-n">500</span>), (<span class="py-s">'sim'</span>, <span class="py-n">500</span>)):
+    <span class="py-v">tA</span> = <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-n">10</span> * <span class="py-v">fs</span>) / <span class="py-v">fs</span>; <span class="py-v">tB</span> = <span class="py-v">tA</span> + (<span class="py-n">0</span> <span class="py-k">if</span> <span class="py-v">kind</span> == <span class="py-s">'sim'</span> <span class="py-k">else</span> <span class="py-n">0.5</span> / <span class="py-v">fs</span>)
+    <span class="py-k">for</span> <span class="py-v">e</span>, <span class="py-v">mm</span> <span class="py-k">in</span> ((<span class="py-n">0</span>, <span class="py-n">1</span>), (<span class="py-n">1</span>, <span class="py-n">0</span>)):
+        <span class="py-v">A</span> = -<span class="py-n">0.4</span> * <span class="py-v">e</span> * <span class="py-f">ecg</span>(<span class="py-v">tA</span>) + <span class="py-v">mm</span> * <span class="py-f">m</span>(<span class="py-v">tA</span>); <span class="py-v">B</span> = <span class="py-n">0.6</span> * <span class="py-v">e</span> * <span class="py-f">ecg</span>(<span class="py-v">tB</span>) + <span class="py-v">mm</span> * <span class="py-f">m</span>(<span class="py-v">tB</span>); <span class="py-v">t</span> = <span class="py-v">tB</span>
+        <span class="py-k">if</span> <span class="py-v">kind</span> == <span class="py-s">'avg'</span>: <span class="py-v">A</span> = (<span class="py-v">A</span>[:-<span class="py-n">1</span>] + <span class="py-v">A</span>[<span class="py-n">1</span>:]) / <span class="py-n">2</span>; <span class="py-v">B</span> = <span class="py-v">B</span>[:-<span class="py-n">1</span>]; <span class="py-v">t</span> = <span class="py-v">tB</span>[:-<span class="py-n">1</span>]
+        <span class="py-v">d</span> = <span class="py-v">B</span> - <span class="py-v">A</span> - <span class="py-v">e</span> * <span class="py-f">ecg</span>(<span class="py-v">t</span>)
+        <span class="py-f">print</span>(<span class="py-v">kind</span>, <span class="py-v">fs</span>, <span class="py-f">round</span>(<span class="py-f">float</span>(<span class="py-f">abs</span>(<span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-f">mean</span>(<span class="py-v">d</span> * <span class="py-m">np</span>.<span class="py-f">exp</span>(-<span class="py-n">2j</span> * <span class="py-m">np</span>.<span class="py-v">pi</span> * <span class="py-n">50</span> * <span class="py-v">t</span>)))), <span class="py-n">3</span>) <span class="py-k">if</span> <span class="py-v">mm</span> <span class="py-k">else</span>
+              (<span class="py-f">round</span>(<span class="py-f">float</span>(<span class="py-n">1000</span> * <span class="py-m">np</span>.<span class="py-f">sqrt</span>(<span class="py-m">np</span>.<span class="py-f">mean</span>(<span class="py-v">d</span> ** <span class="py-n">2</span>))), <span class="py-n">2</span>), <span class="py-f">round</span>(<span class="py-f">float</span>(<span class="py-n">1000</span> * <span class="py-f">abs</span>(<span class="py-v">d</span>).<span class="py-f">max</span>()), <span class="py-n">2</span>)))</code></pre>
+<p class="rnote">โค้ดนี้คำนวณทุกหลักในตาราง<span class="se"> </span>ถ้าเปลี่ยน 2 ใน <code class="ic"><span class="py-v">m</span></code> เป็น 10 โค้ดจะให้ผลของกรณีถัดไป ซึ่งใช้ตรวจคำตอบที่หาด้วยมือได้</p>
 </details>
 </div>
 
@@ -987,17 +996,17 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p>ADC 24 บิตไม่เพิ่มเลยในทศนิยมสองตำแหน่ง เพราะสัญญาณรบกวนที่ใส่ไว้มี RMS 5.03 µV<span class="se"> </span>จากผลข้างต้น <a class="lref" href="#pr-2C">ข้อเสนอ 2C</a> ผ่าน 2ก* และ 2ข* แต่ต้องใช้ ADC 24 บิต จึงไม่มี 2ค <span class="vd ok">ใช้ได้ดี</span></p>
 <p class="cnext"><b>กรณีถัดไป</b> ADC 20 บิตช่วงเดิม เดาก่อนว่าผ่าน 2ข* หรือไม่ แล้วตรวจคำตอบในแบบฝึกหัดข้อ 7</p>
 <details class="redo"><summary>คำนวณซ้ำเอง (Python)</summary>
-<pre><code>import numpy as np
-waves = [(-0.20, 0.15, 0.025), (-0.025, -0.15, 0.008), (0, 1.2, 0.010), (0.025, -0.30, 0.010), (0.25, 0.30, 0.050)]
-t = np.arange(5000) / 500; beats = np.arange(0.4037, 9.6, 60 / 72)
-ecg = sum(1000 * a * np.exp(-0.5 * ((t - b - d) / s) ** 2) for b in beats for d, a, s in waves)
-x = 150000 + ecg + 5 * np.random.default_rng(5).standard_normal(len(t))
-for bits, V in ((12, 4096), (12, 524288), (16, 524288), (24, 524288)):
-    D = 2 * V / 2 ** bits
-    q = np.clip(np.round(x / D), -2 ** (bits - 1), 2 ** (bits - 1) - 1) * D
-    print(bits, V, round(float(100 * np.mean(abs(q - x) > D / 2 + 1e-9)), 1),
-          round(float(np.sqrt(np.mean((q - x) ** 2))), 3), round(float(np.sqrt(np.mean((q - 150000 - ecg) ** 2))), 2))</code></pre>
-<p class="rnote">โค้ดนี้คำนวณทุกหลักในตาราง<span class="se"> </span>ลองใส่ <code>(20, 524288)</code> เพื่อตอบกรณีถัดไป</p>
+<pre class="py"><code><span class="py-k">import</span> <span class="py-m">numpy</span> <span class="py-k">as</span> <span class="py-m">np</span>
+<span class="py-v">waves</span> = [(-<span class="py-n">0.20</span>, <span class="py-n">0.15</span>, <span class="py-n">0.025</span>), (-<span class="py-n">0.025</span>, -<span class="py-n">0.15</span>, <span class="py-n">0.008</span>), (<span class="py-n">0</span>, <span class="py-n">1.2</span>, <span class="py-n">0.010</span>), (<span class="py-n">0.025</span>, -<span class="py-n">0.30</span>, <span class="py-n">0.010</span>), (<span class="py-n">0.25</span>, <span class="py-n">0.30</span>, <span class="py-n">0.050</span>)]
+<span class="py-v">t</span> = <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-n">5000</span>) / <span class="py-n">500</span>; <span class="py-v">beats</span> = <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-n">0.4037</span>, <span class="py-n">9.6</span>, <span class="py-n">60</span> / <span class="py-n">72</span>)
+<span class="py-v">ecg</span> = <span class="py-f">sum</span>(<span class="py-n">1000</span> * <span class="py-v">a</span> * <span class="py-m">np</span>.<span class="py-f">exp</span>(-<span class="py-n">0.5</span> * ((<span class="py-v">t</span> - <span class="py-v">b</span> - <span class="py-v">d</span>) / <span class="py-v">s</span>) ** <span class="py-n">2</span>) <span class="py-k">for</span> <span class="py-v">b</span> <span class="py-k">in</span> <span class="py-v">beats</span> <span class="py-k">for</span> <span class="py-v">d</span>, <span class="py-v">a</span>, <span class="py-v">s</span> <span class="py-k">in</span> <span class="py-v">waves</span>)
+<span class="py-v">x</span> = <span class="py-n">150000</span> + <span class="py-v">ecg</span> + <span class="py-n">5</span> * <span class="py-m">np</span>.<span class="py-m">random</span>.<span class="py-f">default_rng</span>(<span class="py-n">5</span>).<span class="py-f">standard_normal</span>(<span class="py-f">len</span>(<span class="py-v">t</span>))
+<span class="py-k">for</span> <span class="py-v">bits</span>, <span class="py-v">V</span> <span class="py-k">in</span> ((<span class="py-n">12</span>, <span class="py-n">4096</span>), (<span class="py-n">12</span>, <span class="py-n">524288</span>), (<span class="py-n">16</span>, <span class="py-n">524288</span>), (<span class="py-n">24</span>, <span class="py-n">524288</span>)):
+    <span class="py-v">D</span> = <span class="py-n">2</span> * <span class="py-v">V</span> / <span class="py-n">2</span> ** <span class="py-v">bits</span>
+    <span class="py-v">q</span> = <span class="py-m">np</span>.<span class="py-f">clip</span>(<span class="py-m">np</span>.<span class="py-f">round</span>(<span class="py-v">x</span> / <span class="py-v">D</span>), -<span class="py-n">2</span> ** (<span class="py-v">bits</span> - <span class="py-n">1</span>), <span class="py-n">2</span> ** (<span class="py-v">bits</span> - <span class="py-n">1</span>) - <span class="py-n">1</span>) * <span class="py-v">D</span>
+    <span class="py-f">print</span>(<span class="py-v">bits</span>, <span class="py-v">V</span>, <span class="py-f">round</span>(<span class="py-f">float</span>(<span class="py-n">100</span> * <span class="py-m">np</span>.<span class="py-f">mean</span>(<span class="py-f">abs</span>(<span class="py-v">q</span> - <span class="py-v">x</span>) &gt; <span class="py-v">D</span> / <span class="py-n">2</span> + <span class="py-n">1e-9</span>)), <span class="py-n">1</span>),
+          <span class="py-f">round</span>(<span class="py-f">float</span>(<span class="py-m">np</span>.<span class="py-f">sqrt</span>(<span class="py-m">np</span>.<span class="py-f">mean</span>((<span class="py-v">q</span> - <span class="py-v">x</span>) ** <span class="py-n">2</span>))), <span class="py-n">3</span>), <span class="py-f">round</span>(<span class="py-f">float</span>(<span class="py-m">np</span>.<span class="py-f">sqrt</span>(<span class="py-m">np</span>.<span class="py-f">mean</span>((<span class="py-v">q</span> - <span class="py-n">150000</span> - <span class="py-v">ecg</span>) ** <span class="py-n">2</span>))), <span class="py-n">2</span>))</code></pre>
+<p class="rnote">โค้ดนี้คำนวณทุกหลักในตาราง<span class="se"> </span>ถ้าใส่ <code class="ic">(<span class="py-n">20</span>, <span class="py-n">524288</span>)</code> โค้ดจะให้ผลของกรณีถัดไป ซึ่งใช้ตรวจคำตอบที่หาด้วยมือได้</p>
 </details>
 </div>
 
@@ -1320,19 +1329,19 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p>ส่วนที่ 1,000 ค่าต่อวินาทีได้ 19.94 ถึง 20.08 ms<span class="se"> </span>ค่าเฉลี่ยจึงยืนยันว่า<a class="lref" href="#pr-3A">ข้อเสนอ 3A</a> และ<a class="lref" href="#pr-3B">ข้อเสนอ 3B</a> ผ่าน 3ก* แต่บันทึก 5 นาทีชุดเดียวที่ 250 ค่าต่อวินาทียังแกว่งได้ราว ±3% และ 4 ใน 20 ชุดอ่านได้เกิน 20.4 ms</p>
 <p class="cnext"><b>กรณีถัดไป</b> ชักตัวอย่างที่ 500 ค่าต่อวินาที เดาก่อนว่า RMSSD ที่ทำนายได้เป็นเท่าใด แล้วตรวจคำตอบในแบบฝึกหัดข้อ 8</p>
 <details class="redo"><summary>คำนวณซ้ำเอง (Python)</summary>
-<pre><code>import numpy as np
-waves = [(-0.20, 0.15, 0.025), (-0.025, -0.15, 0.008), (0, 1.2, 0.010), (0.025, -0.30, 0.010), (0.25, 0.30, 0.050)]
-z = np.random.default_rng(8).standard_normal(375); rmssd = lambda r: 1000 * np.sqrt(np.mean(np.diff(r) ** 2))
-rr = 0.8 + z * 0.020 / np.sqrt(np.mean(np.diff(z) ** 2)); beats = 1.0 + np.r_[0, np.cumsum(rr)]
-for fs in (50, 100, 250, 1000):
-    pk = []
-    for b in beats:
-        k = np.arange(np.floor((b - 0.06) * fs), np.floor((b - 0.06) * fs) + int(0.12 * fs) + 2); t = k / fs
-        pk.append(t[np.argmax(sum(a * np.exp(-0.5 * ((t - b - d) / s) ** 2) for d, a, s in waves))])
-    rm = np.diff(pk)
-    print(fs, round(float(60 * len(rm) / rm.sum()), 2), round(float(rmssd(rm)), 2), round((400 + (1000 / fs) ** 2 / 2) ** 0.5, 2),
-          round(float(1000 * np.sqrt(np.mean((rm - rr) ** 2))), 2))</code></pre>
-<p class="rnote">โค้ดนี้คำนวณทุกหลักในตาราง<span class="se"> </span>ลองเพิ่ม 500 ในรายการของ <code>fs</code> เพื่อตอบกรณีถัดไป</p>
+<pre class="py"><code><span class="py-k">import</span> <span class="py-m">numpy</span> <span class="py-k">as</span> <span class="py-m">np</span>
+<span class="py-v">waves</span> = [(-<span class="py-n">0.20</span>, <span class="py-n">0.15</span>, <span class="py-n">0.025</span>), (-<span class="py-n">0.025</span>, -<span class="py-n">0.15</span>, <span class="py-n">0.008</span>), (<span class="py-n">0</span>, <span class="py-n">1.2</span>, <span class="py-n">0.010</span>), (<span class="py-n">0.025</span>, -<span class="py-n">0.30</span>, <span class="py-n">0.010</span>), (<span class="py-n">0.25</span>, <span class="py-n">0.30</span>, <span class="py-n">0.050</span>)]
+<span class="py-v">z</span> = <span class="py-m">np</span>.<span class="py-m">random</span>.<span class="py-f">default_rng</span>(<span class="py-n">8</span>).<span class="py-f">standard_normal</span>(<span class="py-n">375</span>); <span class="py-v">rmssd</span> = <span class="py-b">lambda</span> <span class="py-v">r</span>: <span class="py-n">1000</span> * <span class="py-m">np</span>.<span class="py-f">sqrt</span>(<span class="py-m">np</span>.<span class="py-f">mean</span>(<span class="py-m">np</span>.<span class="py-f">diff</span>(<span class="py-v">r</span>) ** <span class="py-n">2</span>))
+<span class="py-v">rr</span> = <span class="py-n">0.8</span> + <span class="py-v">z</span> * <span class="py-n">0.020</span> / <span class="py-m">np</span>.<span class="py-f">sqrt</span>(<span class="py-m">np</span>.<span class="py-f">mean</span>(<span class="py-m">np</span>.<span class="py-f">diff</span>(<span class="py-v">z</span>) ** <span class="py-n">2</span>)); <span class="py-v">beats</span> = <span class="py-n">1.0</span> + <span class="py-m">np</span>.<span class="py-v">r_</span>[<span class="py-n">0</span>, <span class="py-m">np</span>.<span class="py-f">cumsum</span>(<span class="py-v">rr</span>)]
+<span class="py-k">for</span> <span class="py-v">fs</span> <span class="py-k">in</span> (<span class="py-n">50</span>, <span class="py-n">100</span>, <span class="py-n">250</span>, <span class="py-n">1000</span>):
+    <span class="py-v">pk</span> = []
+    <span class="py-k">for</span> <span class="py-v">b</span> <span class="py-k">in</span> <span class="py-v">beats</span>:
+        <span class="py-v">k</span> = <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-m">np</span>.<span class="py-f">floor</span>((<span class="py-v">b</span> - <span class="py-n">0.06</span>) * <span class="py-v">fs</span>), <span class="py-m">np</span>.<span class="py-f">floor</span>((<span class="py-v">b</span> - <span class="py-n">0.06</span>) * <span class="py-v">fs</span>) + <span class="py-f">int</span>(<span class="py-n">0.12</span> * <span class="py-v">fs</span>) + <span class="py-n">2</span>); <span class="py-v">t</span> = <span class="py-v">k</span> / <span class="py-v">fs</span>
+        <span class="py-v">pk</span>.<span class="py-f">append</span>(<span class="py-v">t</span>[<span class="py-m">np</span>.<span class="py-f">argmax</span>(<span class="py-f">sum</span>(<span class="py-v">a</span> * <span class="py-m">np</span>.<span class="py-f">exp</span>(-<span class="py-n">0.5</span> * ((<span class="py-v">t</span> - <span class="py-v">b</span> - <span class="py-v">d</span>) / <span class="py-v">s</span>) ** <span class="py-n">2</span>) <span class="py-k">for</span> <span class="py-v">d</span>, <span class="py-v">a</span>, <span class="py-v">s</span> <span class="py-k">in</span> <span class="py-v">waves</span>))])
+    <span class="py-v">rm</span> = <span class="py-m">np</span>.<span class="py-f">diff</span>(<span class="py-v">pk</span>)
+    <span class="py-f">print</span>(<span class="py-v">fs</span>, <span class="py-f">round</span>(<span class="py-f">float</span>(<span class="py-n">60</span> * <span class="py-f">len</span>(<span class="py-v">rm</span>) / <span class="py-v">rm</span>.<span class="py-f">sum</span>()), <span class="py-n">2</span>), <span class="py-f">round</span>(<span class="py-f">float</span>(<span class="py-f">rmssd</span>(<span class="py-v">rm</span>)), <span class="py-n">2</span>), <span class="py-f">round</span>((<span class="py-n">400</span> + (<span class="py-n">1000</span> / <span class="py-v">fs</span>) ** <span class="py-n">2</span> / <span class="py-n">2</span>) ** <span class="py-n">0.5</span>, <span class="py-n">2</span>),
+          <span class="py-f">round</span>(<span class="py-f">float</span>(<span class="py-n">1000</span> * <span class="py-m">np</span>.<span class="py-f">sqrt</span>(<span class="py-m">np</span>.<span class="py-f">mean</span>((<span class="py-v">rm</span> - <span class="py-v">rr</span>) ** <span class="py-n">2</span>))), <span class="py-n">2</span>))</code></pre>
+<p class="rnote">โค้ดนี้คำนวณทุกหลักในตาราง<span class="se"> </span>ถ้าเพิ่ม 500 ในรายการของ <code class="ic"><span class="py-v">fs</span></code> โค้ดจะให้ผลของกรณีถัดไป ซึ่งใช้ตรวจคำตอบที่หาด้วยมือได้</p>
 </details>
 </div>
 

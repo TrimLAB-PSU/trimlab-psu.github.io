@@ -120,7 +120,7 @@ ol.steps li{margin-bottom:.6em}
 .vd.ok{color:var(--paper);background:var(--accent)}
 details.redo{margin:4px 0 12px;font-family:var(--sans);font-size:14px}
 details.redo summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13px;letter-spacing:.03em}
-details.redo pre{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;
+details.redo pre,div.example pre{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;
   font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
 details.redo .rnote{color:var(--muted);font-size:13px;margin:6px 0 0}
 
@@ -382,7 +382,7 @@ ul.essb{margin:.25em 0 .2em;padding-left:1.25em}ul.essb li{margin:.55em 0;line-h
   }
   html.night{--muted:#9faea3}
   html.night .page{box-shadow:0 0 0 1px #26302a, 0 18px 50px -30px rgba(0,0,0,.7)}
-  html.night details.redo pre{background:var(--box)}
+  html.night details.redo pre,html.night div.example pre{background:var(--box)}
   html.night body.hide .rd:not(.shown){background:repeating-linear-gradient(90deg,var(--rule) 0 6px,transparent 6px 10px) bottom/100% 1.5px no-repeat, rgba(143,208,169,.09)}
   html.night body.hide rect.slot{fill:rgba(143,208,169,.10)}
   html.night .figtap{background:rgba(143,208,169,.12)}
@@ -502,6 +502,15 @@ code.ic .ns{color:#267f99} code.ic .fn{color:#795e26}
 html.night code.ic{background:#1e1e1e;border-color:#3c3c3c;color:#d4d4d4}
 html.night code.ic .ns{color:#4ec9b0} html.night code.ic .fn{color:#dcdcaa}
 @media print{code.ic{background:none;border-color:#ccc}}
+/* Python tokens in code blocks and inline code (VS Code Light Modern / Dark Modern) */
+pre.py{background:#fbfdfa;border:1px solid var(--rule);border-radius:4px;padding:10px 12px;margin:8px 0 0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;color:#1f1f1f}
+pre.py .py-c,code.ic .py-c{color:#008000} pre.py .py-s,code.ic .py-s{color:#a31515} pre.py .py-n,code.ic .py-n{color:#098658}
+pre.py .py-k,code.ic .py-k{color:#af00db} pre.py .py-b,code.ic .py-b{color:#0000ff} pre.py .py-f,code.ic .py-f{color:#795e26}
+pre.py .py-v,code.ic .py-v,pre.py .py-p,code.ic .py-p{color:#001080} pre.py .py-m,code.ic .py-m{color:#267f99}
+html.night pre.py{background:#1e1e1e;border-color:#3c3c3c;color:#d4d4d4}
+html.night pre.py .py-c,html.night code.ic .py-c{color:#6a9955} html.night pre.py .py-s,html.night code.ic .py-s{color:#ce9178} html.night pre.py .py-n,html.night code.ic .py-n{color:#b5cea8}
+html.night pre.py .py-k,html.night code.ic .py-k{color:#c586c0} html.night pre.py .py-b,html.night code.ic .py-b{color:#569cd6} html.night pre.py .py-f,html.night code.ic .py-f{color:#dcdcaa}
+html.night pre.py .py-v,html.night code.ic .py-v,html.night pre.py .py-p,html.night code.ic .py-p{color:#9cdcfe} html.night pre.py .py-m,html.night code.ic .py-m{color:#4ec9b0}
 </style>
 <script>(function(){var r=document.documentElement,t=null,n=null;try{t=localStorage.getItem("theme");n=localStorage.getItem("night")}catch(e){}
 r.setAttribute("data-theme",t||"green");var on=n?n==="1":(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);if(on)r.classList.add("night");})();</script>
@@ -1369,19 +1378,19 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p><span class="k" role="img" aria-label="คิดก่อนอ่านต่อ">✎</span> พจน์นี้หาร 301 แล้วคูณ 75.25 มีขนาดราวเท่าใด <span class="rd">ราว 1.33 ครั้งต่อนาที ซึ่งคือส่วนที่ค่าประมาณขาดไป<span class="se"> </span>ผลลบ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">77.16</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">75.82</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1.34</span></span></span></span></span> ในตารางต่างไปเพียงเพราะการปัดทศนิยม</span><span class="se"> </span><span class="k" role="img" aria-label="คิดก่อนอ่านต่อ">✎</span> ชีพจรเฉลี่ยเพิ่มจาก 75 เป็น 75.25<span class="se"> </span>ตัวเลข 0.25 มาจากไหน <span class="rd">นับเกินหนึ่งจังหวะในเวลา 240 วินาที จึงเพิ่ม <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">60/240</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.25</span></span></span></span></span> ครั้งต่อนาที</span><span class="se"> </span><span class="k" role="img" aria-label="คิดก่อนอ่านต่อ">✎</span> <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8312em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8312em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">h</span></span><span style="top:-3.2634em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;"><span class="mord">ˉ</span></span></span></span></span></span></span></span></span></span></span> เพิ่มขึ้นจากกรณี 1 เท่าใด <span class="rd"><span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">77.16</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">75.38</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1.78</span></span></span></span></span> ครั้งต่อนาที มากกว่าที่ชีพจรเฉลี่ยเพิ่มราวเจ็ดเท่า จากยอดเกินเพียงยอดเดียว</span></p>
 <p class="cnext"><b>กรณีถัดไป</b> คราวนี้เครื่องตรวจยอดพลาดหนึ่งยอด<span class="se"> </span>ช่วงที่ 150 และ 151 จึงรวมเป็นช่วงเดียวยาวราว 1.68 วินาที<span class="se"> </span>เดาก่อนว่าค่าเฉลี่ยใดเปลี่ยนไปทางใดและมากน้อยเท่าใด แล้วตรวจคำตอบในแบบฝึกหัดข้อ 7</p>
 <details class="redo"><summary>คำนวณซ้ำเอง (Python)</summary>
-<pre><code>import numpy as np
-i = np.arange(300)
-rr = 0.8 * (1 + 0.1 * np.sin(2 * np.pi * i / 5))            # กรณี 1
-rr_b = rr + np.random.default_rng(0).normal(0, 0.02, 300)    # กรณี 2
-rr_c = rr.copy()
-for k in range(40, 300, 50):                                 # กรณี 3
-    s = rr_c[k] + rr_c[k + 1]; rr_c[k], rr_c[k + 1] = 0.5, s - 0.5
-rr_d = np.concatenate([rr[:150], [0.1, rr[150] - 0.1], rr[151:]])   # กรณี 4
-for x in (rr, rr_b, rr_c, rr_d):
-    hbar, hr = np.mean(60 / x), 60 * len(x) / x.sum()
-    e = x / x.mean() - 1
-    print(round(hbar, 3), round(hr, 3), round(hr * (1 + np.mean(e**2)), 3))</code></pre>
-<p class="rnote">โค้ดพิมพ์ทศนิยมสามตำแหน่ง ซึ่งปัดเป็นสองตำแหน่งได้ตารางข้างบน<span class="se"> </span>ลองเปลี่ยน 0.1 ในบรรทัดที่สามเป็น 0.2 แล้วดูว่าผลต่างของกรณี 1 โตราวสี่เท่าตาม<a class="xref" href="#prop-0-2">สมบัติ 0-2</a> หรือไม่</p>
+<pre class="py"><code><span class="py-k">import</span> <span class="py-m">numpy</span> <span class="py-k">as</span> <span class="py-m">np</span>
+<span class="py-v">i</span> = <span class="py-m">np</span>.<span class="py-f">arange</span>(<span class="py-n">300</span>)
+<span class="py-v">rr</span> = <span class="py-n">0.8</span> * (<span class="py-n">1</span> + <span class="py-n">0.1</span> * <span class="py-m">np</span>.<span class="py-f">sin</span>(<span class="py-n">2</span> * <span class="py-m">np</span>.<span class="py-v">pi</span> * <span class="py-v">i</span> / <span class="py-n">5</span>))            <span class="py-c"># กรณี 1</span>
+<span class="py-v">rr_b</span> = <span class="py-v">rr</span> + <span class="py-m">np</span>.<span class="py-m">random</span>.<span class="py-f">default_rng</span>(<span class="py-n">0</span>).<span class="py-f">normal</span>(<span class="py-n">0</span>, <span class="py-n">0.02</span>, <span class="py-n">300</span>)    <span class="py-c"># กรณี 2</span>
+<span class="py-v">rr_c</span> = <span class="py-v">rr</span>.<span class="py-f">copy</span>()
+<span class="py-k">for</span> <span class="py-v">k</span> <span class="py-k">in</span> <span class="py-f">range</span>(<span class="py-n">40</span>, <span class="py-n">300</span>, <span class="py-n">50</span>):                                 <span class="py-c"># กรณี 3</span>
+    <span class="py-v">s</span> = <span class="py-v">rr_c</span>[<span class="py-v">k</span>] + <span class="py-v">rr_c</span>[<span class="py-v">k</span> + <span class="py-n">1</span>]; <span class="py-v">rr_c</span>[<span class="py-v">k</span>], <span class="py-v">rr_c</span>[<span class="py-v">k</span> + <span class="py-n">1</span>] = <span class="py-n">0.5</span>, <span class="py-v">s</span> - <span class="py-n">0.5</span>
+<span class="py-v">rr_d</span> = <span class="py-m">np</span>.<span class="py-f">concatenate</span>([<span class="py-v">rr</span>[:<span class="py-n">150</span>], [<span class="py-n">0.1</span>, <span class="py-v">rr</span>[<span class="py-n">150</span>] - <span class="py-n">0.1</span>], <span class="py-v">rr</span>[<span class="py-n">151</span>:]])   <span class="py-c"># กรณี 4</span>
+<span class="py-k">for</span> <span class="py-v">x</span> <span class="py-k">in</span> (<span class="py-v">rr</span>, <span class="py-v">rr_b</span>, <span class="py-v">rr_c</span>, <span class="py-v">rr_d</span>):
+    <span class="py-v">hbar</span>, <span class="py-p">hr</span> = <span class="py-m">np</span>.<span class="py-f">mean</span>(<span class="py-n">60</span> / <span class="py-v">x</span>), <span class="py-n">60</span> * <span class="py-f">len</span>(<span class="py-v">x</span>) / <span class="py-v">x</span>.<span class="py-f">sum</span>()
+    <span class="py-v">e</span> = <span class="py-v">x</span> / <span class="py-v">x</span>.<span class="py-f">mean</span>() - <span class="py-n">1</span>
+    <span class="py-f">print</span>(<span class="py-f">round</span>(<span class="py-v">hbar</span>, <span class="py-n">3</span>), <span class="py-f">round</span>(<span class="py-v">hr</span>, <span class="py-n">3</span>), <span class="py-f">round</span>(<span class="py-v">hr</span> * (<span class="py-n">1</span> + <span class="py-m">np</span>.<span class="py-f">mean</span>(<span class="py-v">e</span>**<span class="py-n">2</span>)), <span class="py-n">3</span>))</code></pre>
+<p class="rnote">โค้ดพิมพ์ทศนิยมสามตำแหน่ง ซึ่งปัดเป็นสองตำแหน่งได้ตารางข้างบน</p>
 </details>
 </div>
 
