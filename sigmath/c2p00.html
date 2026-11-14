@@ -7,7 +7,7 @@
 <title>สาระสำคัญภาค 2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@400;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@400;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* Every colour that must stay readable under a red filter is dark or cool.
    Every background has a red channel of at least 243, so red ink on it vanishes. */
@@ -495,6 +495,13 @@ html.night #tmenu{background:color-mix(in srgb,var(--paper),#fff 10%);box-shadow
 html.night #tmenu .tgl,html.night #tmenu .tname{color:var(--muted)}
 html.night #tmenu button{color:var(--ink)}
 @media print{#tmenu{display:none!important}}
+.enin{white-space:nowrap}
+/* inline code, VS Code style (Light Modern / Dark Modern token colours) */
+code.ic{font:500 .86em/1 "JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;background:#f3f3f3;border:1px solid #e3e3e3;border-radius:5px;padding:.12em .38em;color:#1f1f1f;word-break:normal;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+code.ic .ns{color:#267f99} code.ic .fn{color:#795e26}
+html.night code.ic{background:#1e1e1e;border-color:#3c3c3c;color:#d4d4d4}
+html.night code.ic .ns{color:#4ec9b0} html.night code.ic .fn{color:#dcdcaa}
+@media print{code.ic{background:none;border-color:#ccc}}
 </style>
 <script>(function(){var r=document.documentElement,t=null,n=null;try{t=localStorage.getItem("theme");n=localStorage.getItem("night")}catch(e){}
 r.setAttribute("data-theme",t||"green");var on=n?n==="1":(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);if(on)r.classList.add("night");})();</script>
