@@ -62,6 +62,7 @@ h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.45;marg
 .before{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 28px;
   background:var(--box);border-radius:6px;padding:18px 20px 8px;margin:0 0 40px;font-size:15px;line-height:1.7}
 .before h4,.ahead h4{font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.06em;color:var(--accent);margin:0 0 6px}
+.ahead h4.trh{margin-top:16px}
 .before ul{margin:0 0 12px;padding-left:1.1em}
 .before li{margin:0 0 2px}
 .before .howto{grid-column:1/-1;border-top:1px solid var(--rule);padding-top:12px}
@@ -88,9 +89,8 @@ h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.45;marg
 .box.def{border-left:4px solid var(--accent)}
 .box.thm{border-left:4px solid var(--ink);background:var(--box-2);box-shadow:inset 0 0 0 1px var(--rule)}
 .box.thm .bt{color:var(--ink)}
-.box.prop{background:transparent;box-shadow:inset 0 0 0 1px var(--rule);padding:12px 16px 2px}
-.box.cor{background:transparent;border-left:2px solid var(--rule);border-radius:0;padding:4px 0 2px 18px}
-.box.cor .bt{display:none}
+.box.prop{background:var(--box-c);box-shadow:inset 0 0 0 1px var(--rule);border-left:3px solid var(--accent-2);padding:12px 16px 2px}
+.box.cor{background:var(--box-c);box-shadow:inset 0 0 0 1px var(--rule);border-left:3px solid var(--accent-2);padding:12px 16px 2px}
 .box.given{background:color-mix(in srgb,var(--muted) 9%,var(--paper));border-left:3px solid color-mix(in srgb,var(--muted) 55%,var(--paper));
   padding:10px 14px 2px;margin:10px 0;color:var(--muted);font-size:.88em;line-height:1.65}
 .box.given p{margin:3px 0 7px}
@@ -315,6 +315,8 @@ ol.refs a{color:var(--accent)}
 .prob .crit h5{font-family:var(--sans);font-size:12.5px;font-weight:600;color:var(--accent);margin:.7em 0 .2em}
 .prob .crit ul{margin:0;padding-left:1.1em}.prob .crit li{margin-bottom:.3em;font-weight:400}
 .prob .crit li b.ldef{font-family:var(--sans);margin-right:.25em}
+.prob.goal .gsrc p{font-weight:400;margin:0 0 .35em}.prob.goal .gmain p{margin:0 0 .35em}
+.prob.sol p{font-weight:400;margin:0 0 .45em}.prob.sol p:last-child{margin-bottom:0}
 ul.essl{list-style:none;padding:0;margin:.35em 0 .6em}ul.essl li{margin:.3em 0}
 .el{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.03em;color:var(--muted);margin-right:3px}
 .essd{color:var(--muted)}.essa{margin:.4em 0 0}.essa b{color:var(--accent);font-family:var(--sans);font-size:.92em;margin-right:4px}
@@ -379,7 +381,7 @@ ul.essb{margin:.25em 0 .2em;padding-left:1.25em}ul.essb li{margin:.55em 0;line-h
   .gln .glh{font-size:8pt} .gln .glh::before{font-size:6.5pt} .gln .glt{font-size:7pt}
   .box .sn,.box .gln,.activity .sn,.activity .gln,.example .sn,.example .gln,.conj .sn,.conj .gln{margin-right:calc(-52mm - 18px)}
   .box.prop .sn,.box.prop .gln{margin-right:calc(-52mm - 16px)}
-  .box.cor .sn,.box.cor .gln{margin-right:-52mm}
+  .box.cor .sn,.box.cor .gln{margin-right:calc(-52mm - 16px)}
   ol.exl .sn,ol.exl .gln{margin-right:-52mm}
 
   .md,.tw{overflow:visible}
@@ -999,7 +1001,7 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v0 v585 h43z"/></svg></span></span></
 <h4>ในงานจริง</h4>
 <p><code class="ic"><span class="ns">scipy.<wbr>signal.<wbr></span><span class="fn">periodogram</span>(<span class="py-v">x</span>, <span class="py-p">fs</span>=<span class="py-v">fs</span>)</code> คืนความถี่และพีริโอโดแกรมด้านเดียวในหน่วยของสัญญาณยกกำลังสองต่อเฮิรตซ์ ซึ่งคูณช่องที่ไม่ใช่ศูนย์และไม่ใช่ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2772em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9322em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4461em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1645em;"><span style="top:-2.357em;margin-left:-0.1076em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span> ด้วย 2 แล้ว<span class="se"> </span>กำลังในแถบจึงเป็นผลบวกในแถบคูณ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2772em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9322em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.109em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4461em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1645em;"><span style="top:-2.357em;margin-left:-0.1076em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span> โดยไม่ต้องคูณ 2 อีก</p>
 <p>ตัวเลือก <code class="ic"><span class="py-v">scaling</span>=<span class="py-s">'spectrum'</span></code> ให้หน่วยของสัญญาณยกกำลังสองโดยไม่หารด้วยความกว้างของช่อง ซึ่งเปลี่ยนตามความยาวของบันทึก<span class="se"> </span><code class="ic"><span class="ns">scipy.<wbr>signal.<wbr></span><span class="fn">welch</span></code> เฉลี่ยพีริโอโดแกรมของหลายท่อน ซึ่ง<a class="xref" href="c6p04.html">ตอน 6.4</a> วิเคราะห์</p>
-<ul class="traps">
+<h4 class="trh">ข้อผิดพลาดที่พบบ่อย</h4><ul class="traps">
 <li><b>ใช้ 20 log กับความหนาแน่นสเปกตรัมกำลัง</b> ความหนาแน่นสเปกตรัมกำลังเป็นกำลังอยู่แล้ว ตัวคูณ 20 ทำให้ทุกตัวเลขเป็นสองเท่า</li>
 <li><b>ลืมตัวคูณ 2 ของสเปกตรัมด้านเดียว</b> กำลังในแถบที่คำนวณจากความถี่บวกอย่างเดียวต้องคูณ 2 เว้นแต่โปรแกรมคูณให้แล้ว</li>
 <li><b>รายงานโดยไม่หารด้วยความกว้างของช่อง</b> ค่าในหน่วย µV² ต่อช่องเปลี่ยนตามความยาวของบันทึก เทียบระหว่างงานไม่ได้</li>

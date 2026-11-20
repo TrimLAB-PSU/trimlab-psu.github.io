@@ -62,6 +62,7 @@ h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.45;marg
 .before{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 28px;
   background:var(--box);border-radius:6px;padding:18px 20px 8px;margin:0 0 40px;font-size:15px;line-height:1.7}
 .before h4,.ahead h4{font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.06em;color:var(--accent);margin:0 0 6px}
+.ahead h4.trh{margin-top:16px}
 .before ul{margin:0 0 12px;padding-left:1.1em}
 .before li{margin:0 0 2px}
 .before .howto{grid-column:1/-1;border-top:1px solid var(--rule);padding-top:12px}
@@ -88,9 +89,8 @@ h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.45;marg
 .box.def{border-left:4px solid var(--accent)}
 .box.thm{border-left:4px solid var(--ink);background:var(--box-2);box-shadow:inset 0 0 0 1px var(--rule)}
 .box.thm .bt{color:var(--ink)}
-.box.prop{background:transparent;box-shadow:inset 0 0 0 1px var(--rule);padding:12px 16px 2px}
-.box.cor{background:transparent;border-left:2px solid var(--rule);border-radius:0;padding:4px 0 2px 18px}
-.box.cor .bt{display:none}
+.box.prop{background:var(--box-c);box-shadow:inset 0 0 0 1px var(--rule);border-left:3px solid var(--accent-2);padding:12px 16px 2px}
+.box.cor{background:var(--box-c);box-shadow:inset 0 0 0 1px var(--rule);border-left:3px solid var(--accent-2);padding:12px 16px 2px}
 .box.given{background:color-mix(in srgb,var(--muted) 9%,var(--paper));border-left:3px solid color-mix(in srgb,var(--muted) 55%,var(--paper));
   padding:10px 14px 2px;margin:10px 0;color:var(--muted);font-size:.88em;line-height:1.65}
 .box.given p{margin:3px 0 7px}
@@ -381,7 +381,7 @@ ul.essb{margin:.25em 0 .2em;padding-left:1.25em}ul.essb li{margin:.55em 0;line-h
   .gln .glh{font-size:8pt} .gln .glh::before{font-size:6.5pt} .gln .glt{font-size:7pt}
   .box .sn,.box .gln,.activity .sn,.activity .gln,.example .sn,.example .gln,.conj .sn,.conj .gln{margin-right:calc(-52mm - 18px)}
   .box.prop .sn,.box.prop .gln{margin-right:calc(-52mm - 16px)}
-  .box.cor .sn,.box.cor .gln{margin-right:-52mm}
+  .box.cor .sn,.box.cor .gln{margin-right:calc(-52mm - 16px)}
   ol.exl .sn,ol.exl .gln{margin-right:-52mm}
 
   .md,.tw{overflow:visible}
@@ -1123,7 +1123,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <h4>ในงานจริง</h4>
 <p><code class="ic"><span class="py-m">scipy</span>.<span class="py-m">signal</span>.<span class="py-f">spectrogram</span>(<span class="py-v">x</span>, <span class="py-p">fs</span>=<span class="py-v">fs</span>, <span class="py-p">window</span>=<span class="py-v">w</span>, <span class="py-p">nperseg</span>=<span class="py-v">L</span>, <span class="py-p">noverlap</span>=<span class="py-v">L</span> - <span class="py-v">D</span>, <span class="py-p">detrend</span>=<span class="py-b">False</span>)</code> ให้ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> ของ<a class="xref" href="#def-8.1-1">นิยาม 8.1-1</a> เป็นความหนาแน่นต่อเฮิรตซ์ พร้อมเวลากึ่งกลางของท่อน<span class="se"> </span>ถ้าไม่ใส่ <code class="ic"><span class="py-v">detrend</span>=<span class="py-b">False</span></code> ฟังก์ชันจะลบค่าเฉลี่ยของแต่ละท่อนก่อน ซึ่งเปลี่ยนค่าที่ความถี่ต่ำ<span class="se"> </span><code class="ic"><span class="py-m">scipy</span>.<span class="py-m">signal</span>.<span class="py-v">ShortTimeFFT</span></code> เป็นรุ่นใหม่ที่ให้ STFT เชิงซ้อนและแปลงกลับได้</p>
 <p>ถ้าสิ่งที่ต้องการดูเปลี่ยนในระดับนาที เช่นระยะของการหลับตลอดคืน อาจใช้ท่อนยาวหลายวินาทีแล้วเฉลี่ยตามช่วง ซึ่งคือวิธีของ Welch ทีละช่วง<span class="se"> </span>การอ่านภาพทั้งคืนใช้หลักของ<a class="lref" href="#goal-4">กรณีศึกษา 4</a> เช่นกัน และ SSVEP ที่แรงขึ้นลงตามเวลาอ่านได้จากแถวเดียวของสเปกโตรแกรมที่ความถี่การกระตุ้น</p>
-<ul class="traps">
+<h4 class="trh">ข้อผิดพลาดที่พบบ่อย</h4><ul class="traps">
 <li><b>รายงานตัวเลขโดยไม่บอกความยาวหน้าต่าง</b> ความเร็วของการเปลี่ยนและขนาดของการลดลงที่อ่านได้ขึ้นกับความยาวหน้าต่าง ให้รายงาน <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span></span></span></span></span> หน้าต่าง และระยะเลื่อนทุกครั้ง</li>
 <li><b>วาดภาพด้วยสเกลเชิงเส้น</b> กำลังของสัญญาณชีวภาพต่างกันหลายสิบเดซิเบล ภาพเชิงเส้นจะเห็นเพียงส่วนที่แรงที่สุด ให้ใช้เดซิเบล</li>
 <li><b>อ่านการรั่วตามเวลาเป็นเหตุการณ์</b> เหตุการณ์ที่แรงทำให้ท่อนทั้งหมดที่คร่อมเหตุการณ์มีกำลังสูง ภาพจึงกว้างตามเวลาเท่าหน้าต่าง ไม่ใช่เท่าเหตุการณ์</li>

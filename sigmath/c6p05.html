@@ -62,6 +62,7 @@ h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.45;marg
 .before{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 28px;
   background:var(--box);border-radius:6px;padding:18px 20px 8px;margin:0 0 40px;font-size:15px;line-height:1.7}
 .before h4,.ahead h4{font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.06em;color:var(--accent);margin:0 0 6px}
+.ahead h4.trh{margin-top:16px}
 .before ul{margin:0 0 12px;padding-left:1.1em}
 .before li{margin:0 0 2px}
 .before .howto{grid-column:1/-1;border-top:1px solid var(--rule);padding-top:12px}
@@ -88,9 +89,8 @@ h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.45;marg
 .box.def{border-left:4px solid var(--accent)}
 .box.thm{border-left:4px solid var(--ink);background:var(--box-2);box-shadow:inset 0 0 0 1px var(--rule)}
 .box.thm .bt{color:var(--ink)}
-.box.prop{background:transparent;box-shadow:inset 0 0 0 1px var(--rule);padding:12px 16px 2px}
-.box.cor{background:transparent;border-left:2px solid var(--rule);border-radius:0;padding:4px 0 2px 18px}
-.box.cor .bt{display:none}
+.box.prop{background:var(--box-c);box-shadow:inset 0 0 0 1px var(--rule);border-left:3px solid var(--accent-2);padding:12px 16px 2px}
+.box.cor{background:var(--box-c);box-shadow:inset 0 0 0 1px var(--rule);border-left:3px solid var(--accent-2);padding:12px 16px 2px}
 .box.given{background:color-mix(in srgb,var(--muted) 9%,var(--paper));border-left:3px solid color-mix(in srgb,var(--muted) 55%,var(--paper));
   padding:10px 14px 2px;margin:10px 0;color:var(--muted);font-size:.88em;line-height:1.65}
 .box.given p{margin:3px 0 7px}
@@ -315,6 +315,8 @@ ol.refs a{color:var(--accent)}
 .prob .crit h5{font-family:var(--sans);font-size:12.5px;font-weight:600;color:var(--accent);margin:.7em 0 .2em}
 .prob .crit ul{margin:0;padding-left:1.1em}.prob .crit li{margin-bottom:.3em;font-weight:400}
 .prob .crit li b.ldef{font-family:var(--sans);margin-right:.25em}
+.prob.goal .gsrc p{font-weight:400;margin:0 0 .35em}.prob.goal .gmain p{margin:0 0 .35em}
+.prob.sol p{font-weight:400;margin:0 0 .45em}.prob.sol p:last-child{margin-bottom:0}
 ul.essl{list-style:none;padding:0;margin:.35em 0 .6em}ul.essl li{margin:.3em 0}
 .el{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.03em;color:var(--muted);margin-right:3px}
 .essd{color:var(--muted)}.essa{margin:.4em 0 0}.essa b{color:var(--accent);font-family:var(--sans);font-size:.92em;margin-right:4px}
@@ -379,7 +381,7 @@ ul.essb{margin:.25em 0 .2em;padding-left:1.25em}ul.essb li{margin:.55em 0;line-h
   .gln .glh{font-size:8pt} .gln .glh::before{font-size:6.5pt} .gln .glt{font-size:7pt}
   .box .sn,.box .gln,.activity .sn,.activity .gln,.example .sn,.example .gln,.conj .sn,.conj .gln{margin-right:calc(-52mm - 18px)}
   .box.prop .sn,.box.prop .gln{margin-right:calc(-52mm - 16px)}
-  .box.cor .sn,.box.cor .gln{margin-right:-52mm}
+  .box.cor .sn,.box.cor .gln{margin-right:calc(-52mm - 16px)}
   ol.exl .sn,ol.exl .gln{margin-right:-52mm}
 
   .md,.tw{overflow:visible}
@@ -1064,7 +1066,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <h4>ในงานจริง</h4>
 <p>สมการ <a class="eqref" href="#eq-2">(2)</a> ใน NumPy คือ <code class="ic"><span class="ns">epochs.<wbr></span><span class="fn">mean</span>(<span class="py-v">axis</span>=<span class="py-n">0</span>)</code> เมื่อ <code class="ic"><span class="fn">epochs</span></code> มีขนาดจำนวนช่วงข้อมูลคูณจำนวนค่าตัวอย่าง และสมการ <a class="eqref" href="#eq-7">(7)</a> คือค่าเฉลี่ยของ <code class="ic"><span class="fn">epochs</span></code> ที่คูณแต่ละแถวด้วย <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">+</span><span class="mord">1</span></span></span></span></span> และ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">1</span></span></span></span></span> สลับกัน<span class="se"> </span>งานจำนวนมากลบค่าเฉลี่ยของช่วงก่อนจุดกระตุ้นออกจากแต่ละช่วงข้อมูลก่อนเฉลี่ย ซึ่งคือ <code class="ic"><span class="py-v">epochs</span> - <span class="py-v">epochs</span>[:, :<span class="py-n">50</span>].<span class="py-f">mean</span>(<span class="py-p">axis</span>=<span class="py-n">1</span>, <span class="py-p">keepdims</span>=<span class="py-b">True</span>)</code> และเปลี่ยนผลจากสมการ <a class="eqref" href="#eq-2">(2)</a> ไปเล็กน้อย จึงต้องบอกในรายงานทุกครั้ง</p>
 <p>ช่วงข้อมูลที่มีสิ่งแปลกปลอม เช่น การกะพริบตา ทำให้สัญญาณรบกวนของบางช่วงข้อมูลใหญ่กว่าช่วงข้อมูลอื่นมาก<span class="se"> </span><code class="ic"><span class="ns">np.<wbr></span><span class="fn">ptp</span>(<span class="py-v">epochs</span>, <span class="py-p">axis</span>=<span class="py-n">1</span>)</code> ให้ค่าจากยอดถึงร่องของแต่ละช่วงข้อมูล ซึ่งใช้ตัดช่วงข้อมูลที่เกินเกณฑ์ได้ และเกณฑ์นั้นผู้วิเคราะห์กำหนดเอง</p>
-<ul class="traps">
+<h4 class="trh">ข้อผิดพลาดที่พบบ่อย</h4><ul class="traps">
 <li><b>ใช้ช่วงข้อมูลที่ซ้อนกันแล้วคิดว่าสัญญาณรบกวนลด √N เท่า</b> ช่วงข้อมูลที่ซ้อนกันใช้ค่าตัวอย่างร่วมกัน สัญญาณรบกวนจึงสัมพันธ์กันข้ามช่วงข้อมูลและลดได้น้อยกว่า</li>
 <li><b>กระตุ้นด้วยช่วงห่างที่เป็นพหุคูณของคาบไฟบ้าน</b> ไฟบ้านได้เฟสเดิมทุกช่วงข้อมูลและค้างในค่าเฉลี่ยเต็มขนาด ให้สุ่มช่วงห่างหรือเลือกช่วงห่างที่ไม่ลงตัว</li>
 <li><b>อ่านยอดที่เตี้ยลงเป็นการตอบสนองที่อ่อนลง</b> เวลาแกว่งที่มากขึ้นทำให้ยอดของค่าเฉลี่ยเตี้ยลงได้ แม้การตอบสนองของแต่ละช่วงข้อมูลเท่าเดิม ให้ดูความกว้างและพื้นที่ด้วย</li>

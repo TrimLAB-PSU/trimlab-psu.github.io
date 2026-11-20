@@ -62,6 +62,7 @@ h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.45;marg
 .before{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 28px;
   background:var(--box);border-radius:6px;padding:18px 20px 8px;margin:0 0 40px;font-size:15px;line-height:1.7}
 .before h4,.ahead h4{font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.06em;color:var(--accent);margin:0 0 6px}
+.ahead h4.trh{margin-top:16px}
 .before ul{margin:0 0 12px;padding-left:1.1em}
 .before li{margin:0 0 2px}
 .before .howto{grid-column:1/-1;border-top:1px solid var(--rule);padding-top:12px}
@@ -88,9 +89,8 @@ h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.45;marg
 .box.def{border-left:4px solid var(--accent)}
 .box.thm{border-left:4px solid var(--ink);background:var(--box-2);box-shadow:inset 0 0 0 1px var(--rule)}
 .box.thm .bt{color:var(--ink)}
-.box.prop{background:transparent;box-shadow:inset 0 0 0 1px var(--rule);padding:12px 16px 2px}
-.box.cor{background:transparent;border-left:2px solid var(--rule);border-radius:0;padding:4px 0 2px 18px}
-.box.cor .bt{display:none}
+.box.prop{background:var(--box-c);box-shadow:inset 0 0 0 1px var(--rule);border-left:3px solid var(--accent-2);padding:12px 16px 2px}
+.box.cor{background:var(--box-c);box-shadow:inset 0 0 0 1px var(--rule);border-left:3px solid var(--accent-2);padding:12px 16px 2px}
 .box.given{background:color-mix(in srgb,var(--muted) 9%,var(--paper));border-left:3px solid color-mix(in srgb,var(--muted) 55%,var(--paper));
   padding:10px 14px 2px;margin:10px 0;color:var(--muted);font-size:.88em;line-height:1.65}
 .box.given p{margin:3px 0 7px}
@@ -381,7 +381,7 @@ ul.essb{margin:.25em 0 .2em;padding-left:1.25em}ul.essb li{margin:.55em 0;line-h
   .gln .glh{font-size:8pt} .gln .glh::before{font-size:6.5pt} .gln .glt{font-size:7pt}
   .box .sn,.box .gln,.activity .sn,.activity .gln,.example .sn,.example .gln,.conj .sn,.conj .gln{margin-right:calc(-52mm - 18px)}
   .box.prop .sn,.box.prop .gln{margin-right:calc(-52mm - 16px)}
-  .box.cor .sn,.box.cor .gln{margin-right:-52mm}
+  .box.cor .sn,.box.cor .gln{margin-right:calc(-52mm - 16px)}
   ol.exl .sn,ol.exl .gln{margin-right:-52mm}
 
   .md,.tw{overflow:visible}
@@ -1252,7 +1252,7 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v600 v585 h43z"/></svg></span></span>
 <h4>ในงานจริง</h4>
 <p>ตัวกรอง FIR หลายตัวที่ต่อกันรวมเป็นตัวกรองตัวเดียวได้ล่วงหน้าด้วยคอนโวลูชันของ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">h</span></span></span></span></span> ซึ่งบางครั้งคำนวณเร็วกว่า และทำให้ตรวจเสถียรภาพกับการหน่วงเวลาได้ในที่เดียว<span class="se"> </span>เมื่อรายงานผลของตัวกรอง ให้บอกว่าจัดการต้นและปลายบันทึกอย่างไร และอย่าอ่านเหตุการณ์ใน <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span> ค่าแรกของเอาต์พุต<span class="se"> </span>ฟังก์ชัน <code class="ic"><span class="ns">np.<wbr></span><span class="fn">convolve</span></code> ที่ไม่ใส่ตัวเลือกให้ผลยาว <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span> ค่า และถือว่าค่านอกบันทึกเป็นศูนย์</p>
 <p><span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4653em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">h</span></span></span></span></span> ตาม<a class="xref" href="#def-2.2-2">นิยาม 2.2-2</a> คือ <code class="ic"><span class="ns">np.<wbr></span><span class="fn">convolve</span>(<span class="py-v">x</span>, <span class="py-v">h</span>)</code> เมื่อทั้งสองลำดับเริ่มที่ดัชนี 0 ค่าตำแหน่ง <code class="ic"><span class="py-v">n</span></code> ของผลจึงคือ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">h</span><span class="mclose">)</span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span></span></span></span></span><span class="se"> </span><code class="ic"><span class="ns">scipy.<wbr>signal.<wbr></span><span class="fn">lfilter</span>(<span class="py-v">h</span>, <span class="py-n">1</span>, <span class="py-v">x</span>)</code> ให้ผลเดียวกันเฉพาะช่วงแรกที่ยาวเท่า <code class="ic"><span class="py-v">x</span></code></p>
-<ul class="traps">
+<h4 class="trh">ข้อผิดพลาดที่พบบ่อย</h4><ul class="traps">
 <li>ใช้เอาต์พุตช่วงต้นหรือปลายบันทึกโดยไม่รู้ว่าตัวกรองสมมติค่านอกบันทึกเป็นศูนย์ ทำให้เห็นยอดหรือขั้นปลอม โดยเฉพาะเมื่อสัญญาณมีออฟเซต</li>
 </ul>
 </aside>

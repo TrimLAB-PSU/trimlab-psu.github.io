@@ -62,6 +62,7 @@ h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.45;marg
 .before{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 28px;
   background:var(--box);border-radius:6px;padding:18px 20px 8px;margin:0 0 40px;font-size:15px;line-height:1.7}
 .before h4,.ahead h4{font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.06em;color:var(--accent);margin:0 0 6px}
+.ahead h4.trh{margin-top:16px}
 .before ul{margin:0 0 12px;padding-left:1.1em}
 .before li{margin:0 0 2px}
 .before .howto{grid-column:1/-1;border-top:1px solid var(--rule);padding-top:12px}
@@ -88,9 +89,8 @@ h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.45;marg
 .box.def{border-left:4px solid var(--accent)}
 .box.thm{border-left:4px solid var(--ink);background:var(--box-2);box-shadow:inset 0 0 0 1px var(--rule)}
 .box.thm .bt{color:var(--ink)}
-.box.prop{background:transparent;box-shadow:inset 0 0 0 1px var(--rule);padding:12px 16px 2px}
-.box.cor{background:transparent;border-left:2px solid var(--rule);border-radius:0;padding:4px 0 2px 18px}
-.box.cor .bt{display:none}
+.box.prop{background:var(--box-c);box-shadow:inset 0 0 0 1px var(--rule);border-left:3px solid var(--accent-2);padding:12px 16px 2px}
+.box.cor{background:var(--box-c);box-shadow:inset 0 0 0 1px var(--rule);border-left:3px solid var(--accent-2);padding:12px 16px 2px}
 .box.given{background:color-mix(in srgb,var(--muted) 9%,var(--paper));border-left:3px solid color-mix(in srgb,var(--muted) 55%,var(--paper));
   padding:10px 14px 2px;margin:10px 0;color:var(--muted);font-size:.88em;line-height:1.65}
 .box.given p{margin:3px 0 7px}
@@ -381,7 +381,7 @@ ul.essb{margin:.25em 0 .2em;padding-left:1.25em}ul.essb li{margin:.55em 0;line-h
   .gln .glh{font-size:8pt} .gln .glh::before{font-size:6.5pt} .gln .glt{font-size:7pt}
   .box .sn,.box .gln,.activity .sn,.activity .gln,.example .sn,.example .gln,.conj .sn,.conj .gln{margin-right:calc(-52mm - 18px)}
   .box.prop .sn,.box.prop .gln{margin-right:calc(-52mm - 16px)}
-  .box.cor .sn,.box.cor .gln{margin-right:-52mm}
+  .box.cor .sn,.box.cor .gln{margin-right:calc(-52mm - 16px)}
   ol.exl .sn,ol.exl .gln{margin-right:-52mm}
 
   .md,.tw{overflow:visible}
@@ -1091,7 +1091,7 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <aside class="ahead">
 <h4>ในงานจริง</h4>
 <p>โปรแกรมไม่ได้ปริพันธ์สัญญาณต่อเนื่อง แต่ได้ค่าตัวอย่างของหนึ่งคาบ<span class="se"> </span>ค่า <code class="ic"><span class="ns">np.<wbr>fft.<wbr></span><span class="fn">rfft</span></code>(x)/N ของค่าตัวอย่าง <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span></span> ค่าในหนึ่งคาบให้ค่าประมาณของ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0785em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> ซึ่งคลาดจาก <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0785em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> จริง เพราะฮาร์มอนิกที่ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">±</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span></span>, <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">±</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span></span>, … พับลงมาบวกกันอยู่ในช่องเดียวกัน<span class="se"> </span><a class="xref" href="c3p05.html">ตอน 3.5</a> อธิบายการพับนี้ในโดเมนความถี่<span class="se"> </span>เมื่อตัดความถี่สูงทิ้งทั้งหมดด้วยโปรแกรม เช่น ตั้ง <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0785em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> ที่ <span class="mi"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0315em;">k</span></span></span></span></span> สูงให้เป็นศูนย์แล้วสร้างสัญญาณคืน ผลคือผลบวกย่อยของตอนนี้ ขอบคมในสัญญาณจึงมีการแกว่งข้างขอบตาม<a class="xref" href="#conj-3.2-1">ข้อคาดการณ์ 3.2-1</a></p>
-<ul class="traps">
+<h4 class="trh">ข้อผิดพลาดที่พบบ่อย</h4><ul class="traps">
 <li>อ่านการแกว่งข้างขอบคมหลังตัวกรองต่ำผ่านที่คม หรือหลังการตัดอนุกรมฟูเรียร์ ว่าเป็นคลื่นในสัญญาณจริง ทั้งที่เป็นปรากฏการณ์กิบส์ที่วิธีสร้างขึ้นตาม<a class="xref" href="#conj-3.2-1">ข้อคาดการณ์ 3.2-1</a></li>
 </ul>
 </aside>
